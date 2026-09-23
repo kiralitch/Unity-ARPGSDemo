@@ -1,0 +1,184 @@
+fileFormatVersion: 2
+guid: 65c5008558503a741afe357ba8f7c4a3
+timeCreated: 1548317061
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip01
+    100002: Bip01 Head
+    100004: Bip01 L Calf01
+    100006: Bip01 L Clavicle01
+    100008: Bip01 L Foot01
+    100010: Bip01 L Forearm01
+    100012: Bip01 L Hand
+    100014: Bip01 L Thigh01
+    100016: Bip01 L Toe01
+    100018: Bip01 L UpperArm01
+    100020: Bip01 Neck01
+    100022: Bip01 Pelvis01
+    100024: Bip01 R Calf01
+    100026: Bip01 R Clavicle
+    100028: Bip01 R Foot01
+    100030: Bip01 R Forearm01
+    100032: Bip01 R Hand
+    100034: Bip01 R Thigh01
+    100036: Bip01 R Toe01
+    100038: Bip01 R UpperArm01
+    100040: Bip01 Spine01
+    100042: Bip01 Spine1
+    100044: Bip01 Spine2
+    100046: Monster_HumanMaleStrong_Beach
+    100048: //RootNode
+    100050: node_back
+    100052: node_chest
+    100054: node_fix
+    100056: node_foot_left
+    100058: node_foot_point
+    100060: node_foot_right
+    100062: node_hand_left
+    100064: node_hand_right
+    100066: node_head
+    100068: node_head_point
+    100070: node_lock
+    100072: node_step_left
+    100074: node_step_right
+    100076: node_weapon_left
+    100078: node_weapon_right
+    100080: WP_01
+    100082: WP_01_0
+    400000: Bip01
+    400002: Bip01 Head
+    400004: Bip01 L Calf01
+    400006: Bip01 L Clavicle01
+    400008: Bip01 L Foot01
+    400010: Bip01 L Forearm01
+    400012: Bip01 L Hand
+    400014: Bip01 L Thigh01
+    400016: Bip01 L Toe01
+    400018: Bip01 L UpperArm01
+    400020: Bip01 Neck01
+    400022: Bip01 Pelvis01
+    400024: Bip01 R Calf01
+    400026: Bip01 R Clavicle
+    400028: Bip01 R Foot01
+    400030: Bip01 R Forearm01
+    400032: Bip01 R Hand
+    400034: Bip01 R Thigh01
+    400036: Bip01 R Toe01
+    400038: Bip01 R UpperArm01
+    400040: Bip01 Spine01
+    400042: Bip01 Spine1
+    400044: Bip01 Spine2
+    400046: Monster_HumanMaleStrong_Beach
+    400048: //RootNode
+    400050: node_back
+    400052: node_chest
+    400054: node_fix
+    400056: node_foot_left
+    400058: node_foot_point
+    400060: node_foot_right
+    400062: node_hand_left
+    400064: node_hand_right
+    400066: node_head
+    400068: node_head_point
+    400070: node_lock
+    400072: node_step_left
+    400074: node_step_right
+    400076: node_weapon_left
+    400078: node_weapon_right
+    400080: WP_01
+    400082: WP_01_0
+    4300000: WP_01_0
+    7400000: FatMale_Idle_00_loop
+    7400002: FatMale_Run_00_loop
+    7400004: FatMale_HoverBack_loop
+    7400006: FatMale_HoverFront_loop
+    7400008: FatMale_HoverLeft_loop
+    7400010: FatMale_HoverRight_loop
+    7400012: FatMale_SkillAttack_01
+    7400014: FatMale_SkillAttack_02_01
+    7400016: FatMale_SkillAttack_02_02_loop
+    7400018: FatMale_SkillAttack_02_03
+    7400020: FatMale_Born_00
+    7400022: FatMale_Dead
+    7400024: FatMale_HurtLand_Left
+    7400026: FatMale_FlyUp_Right
+    7400028: FatMale_HurtLand_Normal
+    7400030: FatMale_LieBack_loop
+    7400032: FatMale_Bounce
+    7400034: FatMale_HurtLand_Right
+    7400036: FatMale_FlyUp_Left
+    7400038: FatMale_FlyUp_Normal
+    7400040: FatMale_StandUpBack
+    7400042: FatMale_Faint_loop
+    9500000: //RootNode
+    13700000: WP_01_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

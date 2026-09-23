@@ -1,0 +1,183 @@
+fileFormatVersion: 2
+guid: faa7f3a6bdad7634c9043b022bea658b
+timeCreated: 1548317408
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: Bip001 R Clavicle
+    100006: Bip01
+    100008: Bip01 Head
+    100010: Bip01 L Calf
+    100012: Bip01 L Clavicle
+    100014: Bip01 L Foot
+    100016: Bip01 L Forearm
+    100018: Bip01 L Hand
+    100020: Bip01 L Thigh
+    100022: Bip01 L UpperArm
+    100024: Bip01 Neck
+    100026: Bip01 Pelvis
+    100028: Bip01 R Calf
+    100030: Bip01 R Foot
+    100032: Bip01 R Forearm
+    100034: Bip01 R Hand
+    100036: Bip01 R Thigh
+    100038: Bip01 R UpperArm
+    100040: Bip01 Spine
+    100042: Bip01 Spine1
+    100044: enemy_wolfman_02
+    100046: enemy_wolfman_02_0
+    100048: //RootNode
+    100050: Monster_WerwolfWhite_Summon
+    100052: node_back
+    100054: node_chest
+    100056: node_fix
+    100058: node_foot_left
+    100060: node_foot_point
+    100062: node_foot_right
+    100064: node_hand_left
+    100066: node_hand_right
+    100068: node_head
+    100070: node_head_point
+    100072: node_helm
+    100074: node_lock
+    100076: node_right_weapon
+    100078: node_step_left
+    100080: node_step_right
+    100082: node_weapon_left
+    400000: ??__?__?
+    400002: __?____
+    400004: Bip001 R Clavicle
+    400006: Bip01
+    400008: Bip01 Head
+    400010: Bip01 L Calf
+    400012: Bip01 L Clavicle
+    400014: Bip01 L Foot
+    400016: Bip01 L Forearm
+    400018: Bip01 L Hand
+    400020: Bip01 L Thigh
+    400022: Bip01 L UpperArm
+    400024: Bip01 Neck
+    400026: Bip01 Pelvis
+    400028: Bip01 R Calf
+    400030: Bip01 R Foot
+    400032: Bip01 R Forearm
+    400034: Bip01 R Hand
+    400036: Bip01 R Thigh
+    400038: Bip01 R UpperArm
+    400040: Bip01 Spine
+    400042: Bip01 Spine1
+    400044: enemy_wolfman_02
+    400046: enemy_wolfman_02_0
+    400048: //RootNode
+    400050: Monster_WerwolfWhite_Summon
+    400052: node_back
+    400054: node_chest
+    400056: node_fix
+    400058: node_foot_left
+    400060: node_foot_point
+    400062: node_foot_right
+    400064: node_hand_left
+    400066: node_hand_right
+    400068: node_head
+    400070: node_head_point
+    400072: node_helm
+    400074: node_lock
+    400076: node_right_weapon
+    400078: node_step_left
+    400080: node_step_right
+    400082: node_weapon_left
+    4300000: enemy_wolfman_02_0
+    7400000: WerwolfWhite_Idle_00_loop
+    7400002: WerwolfWhite_Run_loop
+    7400004: WerwolfWhite_SkillAttack_01
+    7400006: WerwolfWhite_HoverBack_loop
+    7400008: WerwolfWhite_HoverFront_loop
+    7400010: WerwolfWhite_HoverLeft_loop
+    7400012: WerwolfWhite_HoverRight_loop
+    7400014: WerwolfWhite_SkillAttack_02
+    7400016: WerwolfWhite_Escape_loop
+    7400018: WerwolfWhite_Born_01
+    7400020: WerwolfWhite_HurtLand_Normal
+    7400022: WerwolfWhite_StandUpBack
+    7400024: WerwolfWhite_LieBack_loop
+    7400026: WerwolfWhite_HurtLand_Left
+    7400028: WerwolfWhite_Dead
+    7400030: WerwolfWhite_HurtLand_Right
+    7400032: WerwolfWhite_FlyUp_Left
+    7400034: WerwolfWhite_FlyUp_Normal
+    7400036: WerwolfWhite_Bounce
+    7400038: WerwolfWhite_FlyUp_Right
+    7400040: WerwolfWhite_Faint_loop
+    9500000: //RootNode
+    13700000: enemy_wolfman_02_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

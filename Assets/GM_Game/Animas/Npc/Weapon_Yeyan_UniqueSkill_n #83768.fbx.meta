@@ -1,0 +1,227 @@
+fileFormatVersion: 2
+guid: 871755035af8dd8499dfe4e2a96ce28c
+timeCreated: 1548317136
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip03
+    100002: Bip03 Head
+    100004: Bip03 L Clavicle
+    100006: Bip03 L Finger0
+    100008: Bip03 L Finger01
+    100010: Bip03 L Finger02
+    100012: Bip03 L Finger1
+    100014: Bip03 L Finger11
+    100016: Bip03 L Finger12
+    100018: Bip03 L Finger2
+    100020: Bip03 L Finger21
+    100022: Bip03 L Finger22
+    100024: Bip03 L Finger3
+    100026: Bip03 L Finger31
+    100028: Bip03 L Finger32
+    100030: Bip03 L Finger4
+    100032: Bip03 L Finger41
+    100034: Bip03 L Finger42
+    100036: Bip03 L Forearm
+    100038: Bip03 L Hand
+    100040: Bip03 L UpperArm
+    100042: Bip03 Neck
+    100044: Bip03 Pelvis
+    100046: Bip03 R Clavicle
+    100048: Bip03 R Finger0
+    100050: Bip03 R Finger01
+    100052: Bip03 R Finger02
+    100054: Bip03 R Finger1
+    100056: Bip03 R Finger11
+    100058: Bip03 R Finger12
+    100060: Bip03 R Finger2
+    100062: Bip03 R Finger21
+    100064: Bip03 R Finger22
+    100066: Bip03 R Finger3
+    100068: Bip03 R Finger31
+    100070: Bip03 R Finger32
+    100072: Bip03 R Finger4
+    100074: Bip03 R Finger41
+    100076: Bip03 R Finger42
+    100078: Bip03 R Forearm
+    100080: Bip03 R Hand
+    100082: Bip03 R UpperArm
+    100084: Bip03 Spine
+    100086: Bip03 Spine1
+    100088: Bip03 Spine2
+    100090: Dummy14
+    100092: g_yeyan_guaiwu_dimian
+    100094: g_yeyan_guaiwu_dimian_andi
+    100096: g_yeyan_guaiwu_dimian_shuibo
+    100098: g_yeyan_guaiwu_dimian_wenli01
+    100100: g_yeyan_guaiwu_dimian_wenli02
+    100102: g_yeyan_guaiwu_dimian_yanwu
+    100104: Hero_Yeyan_UniqueSkill_01
+    100106: node_back
+    100108: node_chest
+    100110: node_foot_left
+    100112: node_foot_right
+    100114: node_hand_left
+    100116: node_hand_right
+    100118: node_head
+    100120: node_helm
+    100122: node_lock
+    100124: node_right_weapon
+    100126: node_step_left
+    100128: node_step_right
+    100130: node_weapon_left
+    100132: Object01
+    100134: Object01_0
+    100136: Object02
+    100138: Object02_0
+    100140: Weapon_Yeyan_UniqueSkill_n
+    100142: //RootNode
+    400000: Bip03
+    400002: Bip03 Head
+    400004: Bip03 L Clavicle
+    400006: Bip03 L Finger0
+    400008: Bip03 L Finger01
+    400010: Bip03 L Finger02
+    400012: Bip03 L Finger1
+    400014: Bip03 L Finger11
+    400016: Bip03 L Finger12
+    400018: Bip03 L Finger2
+    400020: Bip03 L Finger21
+    400022: Bip03 L Finger22
+    400024: Bip03 L Finger3
+    400026: Bip03 L Finger31
+    400028: Bip03 L Finger32
+    400030: Bip03 L Finger4
+    400032: Bip03 L Finger41
+    400034: Bip03 L Finger42
+    400036: Bip03 L Forearm
+    400038: Bip03 L Hand
+    400040: Bip03 L UpperArm
+    400042: Bip03 Neck
+    400044: Bip03 Pelvis
+    400046: Bip03 R Clavicle
+    400048: Bip03 R Finger0
+    400050: Bip03 R Finger01
+    400052: Bip03 R Finger02
+    400054: Bip03 R Finger1
+    400056: Bip03 R Finger11
+    400058: Bip03 R Finger12
+    400060: Bip03 R Finger2
+    400062: Bip03 R Finger21
+    400064: Bip03 R Finger22
+    400066: Bip03 R Finger3
+    400068: Bip03 R Finger31
+    400070: Bip03 R Finger32
+    400072: Bip03 R Finger4
+    400074: Bip03 R Finger41
+    400076: Bip03 R Finger42
+    400078: Bip03 R Forearm
+    400080: Bip03 R Hand
+    400082: Bip03 R UpperArm
+    400084: Bip03 Spine
+    400086: Bip03 Spine1
+    400088: Bip03 Spine2
+    400090: Dummy14
+    400092: g_yeyan_guaiwu_dimian
+    400094: g_yeyan_guaiwu_dimian_andi
+    400096: g_yeyan_guaiwu_dimian_shuibo
+    400098: g_yeyan_guaiwu_dimian_wenli01
+    400100: g_yeyan_guaiwu_dimian_wenli02
+    400102: g_yeyan_guaiwu_dimian_yanwu
+    400104: Hero_Yeyan_UniqueSkill_01
+    400106: node_back
+    400108: node_chest
+    400110: node_foot_left
+    400112: node_foot_right
+    400114: node_hand_left
+    400116: node_hand_right
+    400118: node_head
+    400120: node_helm
+    400122: node_lock
+    400124: node_right_weapon
+    400126: node_step_left
+    400128: node_step_right
+    400130: node_weapon_left
+    400132: Object01
+    400134: Object01_0
+    400136: Object02
+    400138: Object02_0
+    400140: Weapon_Yeyan_UniqueSkill_n
+    400142: //RootNode
+    4300000: Object02_0
+    4300002: Object01_0
+    7400000: Yeyan_UniqueSkillAttack_01_01
+    7400002: Yeyan_UniqueSkillAttack_01_02_loop
+    7400004: Yeyan_UniqueSkillAttack_01_03
+    9500000: //RootNode
+    13700000: Object01_0
+    13700002: Object02_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

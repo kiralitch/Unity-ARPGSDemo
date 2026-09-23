@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: f3e30513d7203d64e9782957ff1ae855
+timeCreated: 1548317390
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: Bone001
+    100006: Bone002
+    100008: Bone003
+    100010: Bone004
+    100012: Bone005
+    100014: Bone006
+    100016: Bone007
+    100018: Bone008
+    100020: FTM_JY
+    100022: FTM_JY_0
+    100024: Monster_FlyHeadElite
+    100026: //RootNode
+    100028: node_chest
+    100030: node_fix
+    100032: node_foot_point
+    100034: node_head
+    100036: node_head_point
+    100038: node_lock
+    400000: ??__?__?
+    400002: __?____
+    400004: Bone001
+    400006: Bone002
+    400008: Bone003
+    400010: Bone004
+    400012: Bone005
+    400014: Bone006
+    400016: Bone007
+    400018: Bone008
+    400020: FTM_JY
+    400022: FTM_JY_0
+    400024: Monster_FlyHeadElite
+    400026: //RootNode
+    400028: node_chest
+    400030: node_fix
+    400032: node_foot_point
+    400034: node_head
+    400036: node_head_point
+    400038: node_lock
+    4300000: FTM_JY_0
+    7400000: FlyHeadElite_Idle_00_loop
+    7400002: FlyHeadElite_Run_loop
+    7400004: FlyHeadElite_SkillAttack_01
+    7400006: FlyHeadElite_HoverBack_loop
+    7400008: FlyHeadElite_HoverFront_loop
+    7400010: FlyHeadElite_HoverLeft_loop
+    7400012: FlyHeadElite_HoverRight_loop
+    7400014: FlyHeadElite_Born_00
+    7400016: FlyHeadElite_Escape_loop
+    7400018: FlyHeadElite_FlyUp_Normal
+    7400020: FlyHeadElite_LieBack_loop
+    7400022: FlyHeadElite_StandUpBack
+    7400024: FlyHeadElite_Dead_Ground
+    7400026: FlyHeadElite_HurtLand_Left
+    7400028: FlyHeadElite_HurtLand_Right
+    7400030: FlyHeadElite_FlyUp_Left
+    7400032: FlyHeadElite_FlyUp_Right
+    7400034: FlyHeadElite_Bounce
+    7400036: FlyHeadElite_Faint_loop
+    7400038: FlyHeadElite_SkillAttack_02_01
+    7400040: FlyHeadElite_SkillAttack_02_02_Loop
+    7400042: FlyHeadElite_SkillAttack_02_03
+    7400044: FlyHeadElite_SkillAttack_03
+    7400046: FlyHeadElite_HurtLand_Normal
+    9500000: //RootNode
+    13700000: FTM_JY_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

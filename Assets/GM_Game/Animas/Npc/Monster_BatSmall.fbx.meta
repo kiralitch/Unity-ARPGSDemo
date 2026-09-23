@@ -1,0 +1,142 @@
+fileFormatVersion: 2
+guid: f9094c7c248ad2c4887d630879d68493
+timeCreated: 1548317406
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ' 1'
+    100002: ??__?__?
+    100004: __?____
+    100006: __t____
+    100008: a_a_Cylinder02
+    100010: a_a_Cylinder02_0
+    100012: Bone001
+    100014: Bone003
+    100016: Bone004
+    100018: Bone005
+    100020: Bone006
+    100022: Bone007
+    100024: Bone008
+    100026: Bone009
+    100028: //RootNode
+    100030: Monster_BatSmall
+    100032: node_chest
+    100034: node_fix
+    100036: node_foot_point
+    100038: node_head
+    100040: node_head_point
+    100042: node_lock
+    400000: ' 1'
+    400002: ??__?__?
+    400004: __?____
+    400006: __t____
+    400008: a_a_Cylinder02
+    400010: a_a_Cylinder02_0
+    400012: Bone001
+    400014: Bone003
+    400016: Bone004
+    400018: Bone005
+    400020: Bone006
+    400022: Bone007
+    400024: Bone008
+    400026: Bone009
+    400028: //RootNode
+    400030: Monster_BatSmall
+    400032: node_chest
+    400034: node_fix
+    400036: node_foot_point
+    400038: node_head
+    400040: node_head_point
+    400042: node_lock
+    4300000: a_a_Cylinder02_0
+    7400000: BatSmall_Idle_00_loop
+    7400002: BatSmall_Run_loop
+    7400004: BatSmall_SkillAttack_01
+    7400006: BatSmall_HoverBack_loop
+    7400008: BatSmall_HoverFront_loop
+    7400010: BatSmall_HoverLeft_loop
+    7400012: BatSmall_HoverRight_loop
+    7400014: BatSmall_Born_00
+    7400016: BatSmall_Escape_loop
+    7400018: BatSmall_HurtLand_Normal
+    7400020: BatSmall_FlyUp_Normal
+    7400022: BatSmall_LieBack_loop
+    7400024: BatSmall_StandUpBack
+    7400026: BatSmall_Dead_Fly
+    7400028: BatSmall_HurtLand_Left
+    7400030: BatSmall_HurtLand_Right
+    7400032: BatSmall_FlyUp_Left
+    7400034: BatSmall_FlyUp_Right
+    7400036: BatSmall_Bounce
+    7400038: BatSmall_Faint_loop
+    9500000: //RootNode
+    13700000: a_a_Cylinder02_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

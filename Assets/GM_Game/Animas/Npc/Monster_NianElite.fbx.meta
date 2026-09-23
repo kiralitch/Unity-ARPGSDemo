@@ -1,0 +1,215 @@
+fileFormatVersion: 2
+guid: 971479dc345e5b742a00744fc86cc955
+timeCreated: 1548317175
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: b_FTM_JY
+    100002: Bip001
+    100004: Bip001 Footsteps
+    100006: Bip001 Head
+    100008: Bip001 HeadNub
+    100010: Bip001 L Calf
+    100012: Bip001 L Clavicle
+    100014: Bip001 L Finger0
+    100016: Bip001 L Finger0Nub
+    100018: Bip001 L Foot
+    100020: Bip001 L Forearm
+    100022: Bip001 L Hand
+    100024: Bip001 L HorseLink
+    100026: Bip001 L Thigh
+    100028: Bip001 L Toe0
+    100030: Bip001 L Toe0Nub
+    100032: Bip001 L UpperArm
+    100034: Bip001 Neck
+    100036: Bip001 Pelvis
+    100038: Bip001 R Calf
+    100040: Bip001 R Clavicle
+    100042: Bip001 R Finger0
+    100044: Bip001 R Finger0Nub
+    100046: Bip001 R Foot
+    100048: Bip001 R Forearm
+    100050: Bip001 R Hand
+    100052: Bip001 R HorseLink
+    100054: Bip001 R Thigh
+    100056: Bip001 R Toe0
+    100058: Bip001 R Toe0Nub
+    100060: Bip001 R UpperArm
+    100062: Bip001 Spine
+    100064: Bip001 Spine1
+    100066: Bone001
+    100068: Bone002
+    100070: Bone003
+    100072: Bone008
+    100074: Bone008(mirrored)
+    100076: Bone009
+    100078: Bone009(mirrored)
+    100080: Bone011
+    100082: Bone011(mirrored)
+    100084: Bone012
+    100086: Bone012(mirrored)
+    100088: Bone013
+    100090: Bone013(mirrored)
+    100092: Bone015
+    100094: Monster_NianElite
+    100096: //RootNode
+    100098: node_chest
+    100100: node_fix
+    100102: node_foot_point
+    100104: node_head
+    100106: node_head_point
+    100108: node_lock
+    100110: Object009
+    100112: Object009_0
+    400000: b_FTM_JY
+    400002: Bip001
+    400004: Bip001 Footsteps
+    400006: Bip001 Head
+    400008: Bip001 HeadNub
+    400010: Bip001 L Calf
+    400012: Bip001 L Clavicle
+    400014: Bip001 L Finger0
+    400016: Bip001 L Finger0Nub
+    400018: Bip001 L Foot
+    400020: Bip001 L Forearm
+    400022: Bip001 L Hand
+    400024: Bip001 L HorseLink
+    400026: Bip001 L Thigh
+    400028: Bip001 L Toe0
+    400030: Bip001 L Toe0Nub
+    400032: Bip001 L UpperArm
+    400034: Bip001 Neck
+    400036: Bip001 Pelvis
+    400038: Bip001 R Calf
+    400040: Bip001 R Clavicle
+    400042: Bip001 R Finger0
+    400044: Bip001 R Finger0Nub
+    400046: Bip001 R Foot
+    400048: Bip001 R Forearm
+    400050: Bip001 R Hand
+    400052: Bip001 R HorseLink
+    400054: Bip001 R Thigh
+    400056: Bip001 R Toe0
+    400058: Bip001 R Toe0Nub
+    400060: Bip001 R UpperArm
+    400062: Bip001 Spine
+    400064: Bip001 Spine1
+    400066: Bone001
+    400068: Bone002
+    400070: Bone003
+    400072: Bone008
+    400074: Bone008(mirrored)
+    400076: Bone009
+    400078: Bone009(mirrored)
+    400080: Bone011
+    400082: Bone011(mirrored)
+    400084: Bone012
+    400086: Bone012(mirrored)
+    400088: Bone013
+    400090: Bone013(mirrored)
+    400092: Bone015
+    400094: //RootNode
+    400096: Monster_NianElite
+    400098: node_chest
+    400100: node_fix
+    400102: node_foot_point
+    400104: node_head
+    400106: node_head_point
+    400108: node_lock
+    400110: Object009
+    400112: Object009_0
+    4300000: Object009_0
+    7400000: NianElite_Idle_00_loop
+    7400002: NianElite_Run_loop
+    7400004: NianElite_SkillAttack_01_01
+    7400006: NianElite_HoverBack_loop
+    7400008: NianElite_HoverFront_loop
+    7400010: NianElite_HoverLeft_loop
+    7400012: NianElite_HoverRight_loop
+    7400014: NianElite_Born_00
+    7400016: NianElite_Escape_loop
+    7400018: NianElite_FlyUp_Normal
+    7400020: NianElite_LieBack_loop
+    7400022: NianElite_StandUpBack
+    7400024: NianElite_Dead
+    7400026: NianElite_HurtLand_Left
+    7400028: NianElite_HurtLand_Right
+    7400030: NianElite_FlyUp_Left
+    7400032: NianElite_FlyUp_Right
+    7400034: NianElite_Bounce
+    7400036: NianElite_Faint_loop
+    7400038: NianElite_SkillAttack_02
+    7400040: NianElite_HurtLand_Normal
+    7400042: NianElite_SkillAttack_01_02
+    7400044: NianElite_SkillAttack_01_03
+    9500000: //RootNode
+    13700000: Object009_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

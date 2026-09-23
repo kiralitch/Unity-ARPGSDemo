@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2988769cd5f0fb4fa9939e8fb7c94a8, type: 3}
+  m_Name: Player_Abilities
+  m_EditorClassIdentifier: 
+  abilitiesList:
+  - <skillName>k__BackingField: LightAttack
+    <AttackClips>k__BackingField:
+    - {fileID: 7400000, guid: 38341cdcf1526f94d8de92d27d711df7, type: 2}
+    - {fileID: 7400000, guid: 87d8b551b8cb14e43a4ffa9ac0b0811d, type: 2}
+    - {fileID: 7400000, guid: ba08dfd9939cdc84f8ee38e3445adf8e, type: 2}
+    <AttackEndClips>k__BackingField:
+    - {fileID: 7400000, guid: bfe815aab8258c84e9aa2c142cad7909, type: 2}
+    - {fileID: 7400000, guid: 82aa0b4c15cbe814bb9af279c3a648cf, type: 2}
+    - {fileID: 7400000, guid: 5180f157598eb4043b336d0b85ec36e3, type: 2}
+    <animationSpeed>k__BackingField: 1
+    <AbilityDamage>k__BackingField: 10
+    <inputAction>k__BackingField: {fileID: 8518295178871382062, guid: 474259d90ec4f1d40bc48b73d29093c1, type: 3}
+    <AttackDistance>k__BackingField: 1
+    <Events>k__BackingField: []

@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: b2805aadff726764cae50aea133820fc
+timeCreated: 1548317232
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone084(mirrored)002
+    100002: Bone085(mirrored)002
+    100004: Bone086(mirrored)002
+    100006: Bone087(mirrored)002
+    100008: Bone088(mirrored)002
+    100010: Bone089(mirrored)002
+    100012: Bone090(mirrored)002
+    100014: Bone119
+    100016: Bone120
+    100018: Bone121
+    100020: Bone122
+    100022: Bone123
+    100024: Bone124
+    100026: Bone125
+    100028: Bone126
+    100030: Bone127
+    100032: Bone128
+    100034: Bone129
+    100036: Bone130
+    100038: Bone131
+    100040: Bone132
+    100042: Bone133
+    100044: Bone134
+    100046: Bone135
+    100048: Bone136
+    100050: Bone137
+    100052: Bone138
+    100054: Bone139
+    100056: Bone140
+    100058: Bone141
+    100060: Bone142
+    100062: Bone143
+    100064: Bone144
+    100066: Bone145
+    100068: Hero_Moyunzhenjun_Skill_03_03_anim
+    100070: //RootNode
+    100072: Monster_MoyunBoss_Skill_03_03
+    100074: MoYun_Skill03_long01
+    100076: Object005
+    100078: Object005_0
+    400000: Bone084(mirrored)002
+    400002: Bone085(mirrored)002
+    400004: Bone086(mirrored)002
+    400006: Bone087(mirrored)002
+    400008: Bone088(mirrored)002
+    400010: Bone089(mirrored)002
+    400012: Bone090(mirrored)002
+    400014: Bone119
+    400016: Bone120
+    400018: Bone121
+    400020: Bone122
+    400022: Bone123
+    400024: Bone124
+    400026: Bone125
+    400028: Bone126
+    400030: Bone127
+    400032: Bone128
+    400034: Bone129
+    400036: Bone130
+    400038: Bone131
+    400040: Bone132
+    400042: Bone133
+    400044: Bone134
+    400046: Bone135
+    400048: Bone136
+    400050: Bone137
+    400052: Bone138
+    400054: Bone139
+    400056: Bone140
+    400058: Bone141
+    400060: Bone142
+    400062: Bone143
+    400064: Bone144
+    400066: Bone145
+    400068: Hero_Moyunzhenjun_Skill_03_03_anim
+    400070: //RootNode
+    400072: Monster_MoyunBoss_Skill_03_03
+    400074: MoYun_Skill03_long01
+    400076: Object005
+    400078: Object005_0
+    4300000: Object005_0
+    7400000: MoYun_Skill03_long01
+    9500000: //RootNode
+    13700000: Object005_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

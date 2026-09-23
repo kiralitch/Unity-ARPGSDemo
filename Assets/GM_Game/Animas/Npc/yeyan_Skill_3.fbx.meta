@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 36a367b9cf4ebfa488cd8d8714cddc6a
+timeCreated: 1548316940
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip01
+    100002: Bip01 Head
+    100004: Bip01 L Calf01
+    100006: Bip01 L Clavicle01
+    100008: Bip01 L Foot01
+    100010: Bip01 L Forearm01
+    100012: Bip01 L Hand
+    100014: Bip01 L Thigh01
+    100016: Bip01 L Toe01
+    100018: Bip01 L UpperArm01
+    100020: Bip01 Neck01
+    100022: Bip01 Pelvis01
+    100024: Bip01 R Calf01
+    100026: Bip01 R Clavicle
+    100028: Bip01 R Foot01
+    100030: Bip01 R Forearm01
+    100032: Bip01 R Hand
+    100034: Bip01 R Thigh01
+    100036: Bip01 R Toe01
+    100038: Bip01 R UpperArm01
+    100040: Bip01 Spine01
+    100042: Bip01 Spine1
+    100044: Bip01 Spine2
+    100046: Dummy01
+    100048: g_yeyan_skill_3
+    100050: g_yeyan_skill_3_hit2
+    100052: g_yeyan_skill_3_smoke
+    100054: g_yeyan_skill_3_smoke 1
+    100056: g_yeyan_skill_3_xuanfeng
+    100058: g_yeyan_skill_3_xuanfeng1
+    100060: g_yeyan_skill_3_xuanfeng_jiaoxia
+    100062: node_back
+    100064: node_chest
+    100066: node_foot_left
+    100068: node_foot_right
+    100070: node_hand_left
+    100072: node_hand_right
+    100074: node_head
+    100076: node_lock
+    100078: node_step_left
+    100080: node_step_right
+    100082: node_weapon_left
+    100084: node_weapon_right
+    100086: yeyan_S3_dz_4
+    100088: //RootNode
+    100090: yeyan_Skill_3
+    100092: yy_dz
+    100094: yy_dz_0
+    400000: Bip01
+    400002: Bip01 Head
+    400004: Bip01 L Calf01
+    400006: Bip01 L Clavicle01
+    400008: Bip01 L Foot01
+    400010: Bip01 L Forearm01
+    400012: Bip01 L Hand
+    400014: Bip01 L Thigh01
+    400016: Bip01 L Toe01
+    400018: Bip01 L UpperArm01
+    400020: Bip01 Neck01
+    400022: Bip01 Pelvis01
+    400024: Bip01 R Calf01
+    400026: Bip01 R Clavicle
+    400028: Bip01 R Foot01
+    400030: Bip01 R Forearm01
+    400032: Bip01 R Hand
+    400034: Bip01 R Thigh01
+    400036: Bip01 R Toe01
+    400038: Bip01 R UpperArm01
+    400040: Bip01 Spine01
+    400042: Bip01 Spine1
+    400044: Bip01 Spine2
+    400046: Dummy01
+    400048: g_yeyan_skill_3
+    400050: g_yeyan_skill_3_hit2
+    400052: g_yeyan_skill_3_smoke
+    400054: g_yeyan_skill_3_smoke 1
+    400056: g_yeyan_skill_3_xuanfeng
+    400058: g_yeyan_skill_3_xuanfeng1
+    400060: g_yeyan_skill_3_xuanfeng_jiaoxia
+    400062: node_back
+    400064: node_chest
+    400066: node_foot_left
+    400068: node_foot_right
+    400070: node_hand_left
+    400072: node_hand_right
+    400074: node_head
+    400076: node_lock
+    400078: node_step_left
+    400080: node_step_right
+    400082: node_weapon_left
+    400084: node_weapon_right
+    400086: yeyan_S3_dz_4
+    400088: yeyan_Skill_3
+    400090: //RootNode
+    400092: yy_dz
+    400094: yy_dz_0
+    4300000: yy_dz_0
+    7400000: yeyan_S3_dz_4_n
+    9500000: //RootNode
+    13700000: yy_dz_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

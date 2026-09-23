@@ -1,0 +1,229 @@
+fileFormatVersion: 2
+guid: b1d22aa4d7045e445960c4095d9258c8
+timeCreated: 1548317230
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: Bip01
+    100006: Bip01 Head
+    100008: Bip01 L Calf01
+    100010: Bip01 L Clavicle01
+    100012: Bip01 L Finger0
+    100014: Bip01 L Finger01
+    100016: Bip01 L Finger02
+    100018: Bip01 L Finger1
+    100020: Bip01 L Finger11
+    100022: Bip01 L Finger12
+    100024: Bip01 L Finger2
+    100026: Bip01 L Finger21
+    100028: Bip01 L Finger22
+    100030: Bip01 L Foot01
+    100032: Bip01 L Forearm01
+    100034: Bip01 L Hand
+    100036: Bip01 L Thigh01
+    100038: Bip01 L Toe01
+    100040: Bip01 L UpperArm01
+    100042: Bip01 Neck01
+    100044: Bip01 Pelvis01
+    100046: Bip01 R Calf01
+    100048: Bip01 R Clavicle
+    100050: Bip01 R Finger0
+    100052: Bip01 R Finger01
+    100054: Bip01 R Finger02
+    100056: Bip01 R Finger1
+    100058: Bip01 R Finger11
+    100060: Bip01 R Finger12
+    100062: Bip01 R Finger2
+    100064: Bip01 R Finger21
+    100066: Bip01 R Finger22
+    100068: Bip01 R Foot01
+    100070: Bip01 R Forearm01
+    100072: Bip01 R Hand
+    100074: Bip01 R Thigh01
+    100076: Bip01 R Toe01
+    100078: Bip01 R UpperArm01
+    100080: Bip01 Spine01
+    100082: Bip01 Spine1
+    100084: enemy_man_01
+    100086: enemy_man_01_0
+    100088: //RootNode
+    100090: Monster_Whiteman
+    100092: node_back
+    100094: node_chest
+    100096: node_fix
+    100098: node_foot_left
+    100100: node_foot_point
+    100102: node_foot_right
+    100104: node_hand_left
+    100106: node_hand_right
+    100108: node_head
+    100110: node_head_point
+    100112: node_lock
+    100114: node_step_left
+    100116: node_step_right
+    100118: node_weapon_left
+    100120: node_weapon_right
+    100122: Object001
+    100124: Object001_0
+    400000: ??__?__?
+    400002: __?____
+    400004: Bip01
+    400006: Bip01 Head
+    400008: Bip01 L Calf01
+    400010: Bip01 L Clavicle01
+    400012: Bip01 L Finger0
+    400014: Bip01 L Finger01
+    400016: Bip01 L Finger02
+    400018: Bip01 L Finger1
+    400020: Bip01 L Finger11
+    400022: Bip01 L Finger12
+    400024: Bip01 L Finger2
+    400026: Bip01 L Finger21
+    400028: Bip01 L Finger22
+    400030: Bip01 L Foot01
+    400032: Bip01 L Forearm01
+    400034: Bip01 L Hand
+    400036: Bip01 L Thigh01
+    400038: Bip01 L Toe01
+    400040: Bip01 L UpperArm01
+    400042: Bip01 Neck01
+    400044: Bip01 Pelvis01
+    400046: Bip01 R Calf01
+    400048: Bip01 R Clavicle
+    400050: Bip01 R Finger0
+    400052: Bip01 R Finger01
+    400054: Bip01 R Finger02
+    400056: Bip01 R Finger1
+    400058: Bip01 R Finger11
+    400060: Bip01 R Finger12
+    400062: Bip01 R Finger2
+    400064: Bip01 R Finger21
+    400066: Bip01 R Finger22
+    400068: Bip01 R Foot01
+    400070: Bip01 R Forearm01
+    400072: Bip01 R Hand
+    400074: Bip01 R Thigh01
+    400076: Bip01 R Toe01
+    400078: Bip01 R UpperArm01
+    400080: Bip01 Spine01
+    400082: Bip01 Spine1
+    400084: enemy_man_01
+    400086: enemy_man_01_0
+    400088: //RootNode
+    400090: Monster_Whiteman
+    400092: node_back
+    400094: node_chest
+    400096: node_fix
+    400098: node_foot_left
+    400100: node_foot_point
+    400102: node_foot_right
+    400104: node_hand_left
+    400106: node_hand_right
+    400108: node_head
+    400110: node_head_point
+    400112: node_lock
+    400114: node_step_left
+    400116: node_step_right
+    400118: node_weapon_left
+    400120: node_weapon_right
+    400122: Object001
+    400124: Object001_0
+    2300000: Object001_0
+    3300000: Object001_0
+    4300000: enemy_man_01_0
+    4300002: Object001_0
+    7400000: Whiteman_Idle_00_loop
+    7400002: Whiteman_Run_loop
+    7400004: Whiteman_SkillAttack_01
+    7400006: Whiteman_HoverBack_loop
+    7400008: Whiteman_HoverFront_loop
+    7400010: Whiteman_HoverLeft_loop
+    7400012: Whiteman_HoverRight_loop
+    7400014: Whiteman_SkillAttack_02
+    7400016: Whiteman_Born_00
+    7400018: Whiteman_Escape_loop
+    7400020: Whiteman_SkillAttack_03
+    7400022: Whiteman_HurtLand_Normal
+    7400024: Whiteman_FlyUp_Normal
+    7400026: Whiteman_LieBack_loop
+    7400028: Whiteman_StandUpBack
+    7400030: Whiteman_Dead
+    7400032: Whiteman_HurtLand_Left
+    7400034: Whiteman_HurtLand_Right
+    7400036: Whiteman_FlyUp_Left
+    7400038: Whiteman_FlyUp_Right
+    7400040: Whiteman_Bounce
+    7400042: Whiteman_Faint_loop
+    9500000: //RootNode
+    13700000: enemy_man_01_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

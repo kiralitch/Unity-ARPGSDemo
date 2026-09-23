@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: 987e0b43836717b45aa1b9f1f0ea9ad0
+timeCreated: 1548317177
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: Bip01
+    100006: Bip01 Head
+    100008: Bip01 L Calf01
+    100010: Bip01 L Clavicle01
+    100012: Bip01 L Foot01
+    100014: Bip01 L Forearm01
+    100016: Bip01 L Hand
+    100018: Bip01 L Thigh01
+    100020: Bip01 L Toe01
+    100022: Bip01 L UpperArm01
+    100024: Bip01 Neck01
+    100026: Bip01 Pelvis01
+    100028: Bip01 R Calf01
+    100030: Bip01 R Clavicle
+    100032: Bip01 R Foot01
+    100034: Bip01 R Forearm01
+    100036: Bip01 R Hand
+    100038: Bip01 R Thigh01
+    100040: Bip01 R Toe01
+    100042: Bip01 R UpperArm01
+    100044: Bip01 Spine01
+    100046: Bip01 Spine1
+    100048: Bip01 Spine2
+    100050: Monster_Drunk
+    100052: //RootNode
+    100054: node_back
+    100056: node_chest
+    100058: node_fix
+    100060: node_foot_left
+    100062: node_foot_point
+    100064: node_foot_right
+    100066: node_hand_left
+    100068: node_hand_right
+    100070: node_head
+    100072: node_head_point
+    100074: node_lock
+    100076: node_special_1
+    100078: node_step_left
+    100080: node_step_right
+    100082: node_weapon_left
+    100084: node_weapon_right
+    100086: zh
+    100088: zh_0
+    100090: zh_w
+    100092: zh_w_0
+    400000: ??__?__?
+    400002: __?____
+    400004: Bip01
+    400006: Bip01 Head
+    400008: Bip01 L Calf01
+    400010: Bip01 L Clavicle01
+    400012: Bip01 L Foot01
+    400014: Bip01 L Forearm01
+    400016: Bip01 L Hand
+    400018: Bip01 L Thigh01
+    400020: Bip01 L Toe01
+    400022: Bip01 L UpperArm01
+    400024: Bip01 Neck01
+    400026: Bip01 Pelvis01
+    400028: Bip01 R Calf01
+    400030: Bip01 R Clavicle
+    400032: Bip01 R Foot01
+    400034: Bip01 R Forearm01
+    400036: Bip01 R Hand
+    400038: Bip01 R Thigh01
+    400040: Bip01 R Toe01
+    400042: Bip01 R UpperArm01
+    400044: Bip01 Spine01
+    400046: Bip01 Spine1
+    400048: Bip01 Spine2
+    400050: Monster_Drunk
+    400052: //RootNode
+    400054: node_back
+    400056: node_chest
+    400058: node_fix
+    400060: node_foot_left
+    400062: node_foot_point
+    400064: node_foot_right
+    400066: node_hand_left
+    400068: node_hand_right
+    400070: node_head
+    400072: node_head_point
+    400074: node_lock
+    400076: node_special_1
+    400078: node_step_left
+    400080: node_step_right
+    400082: node_weapon_left
+    400084: node_weapon_right
+    400086: zh
+    400088: zh_0
+    400090: zh_w
+    400092: zh_w_0
+    2300000: zh_w_0
+    3300000: zh_w_0
+    4300000: zh_0
+    4300002: zh_w_0
+    7400000: Drunk_Idle_00_loop
+    7400002: Drunk_Run_loop
+    7400004: Drunk_SkillAttack_01
+    7400006: Drunk_HoverBack_loop
+    7400008: Drunk_HoverFront_loop
+    7400010: Drunk_HoverLeft_loop
+    7400012: Drunk_HoverRight_loop
+    7400014: Drunk_SkillAttack_02
+    7400016: Drunk_Born_00
+    7400018: Drunk_Escape_loop
+    7400020: Drunk_HurtLand_Normal
+    7400022: Drunk_FlyUp_Normal
+    7400024: Drunk_LieBack_loop
+    7400026: Drunk_StandUpBack
+    7400028: Drunk_Dead
+    7400030: Drunk_HurtLand_Left
+    7400032: Drunk_HurtLand_Right
+    7400034: Drunk_FlyUp_Left
+    7400036: Drunk_FlyUp_Right
+    7400038: Drunk_Bounce
+    7400040: Drunk_Faint_loop
+    9500000: //RootNode
+    13700000: zh_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

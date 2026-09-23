@@ -1,0 +1,131 @@
+fileFormatVersion: 2
+guid: 2f0fc2fda00d7e249913c54862c84d6b
+timeCreated: 1548316923
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: Bone023
+    100006: Bone024
+    100008: Bone025
+    100010: Box004
+    100012: Box004_0
+    100014: Camera001
+    100016: Camera001.Target
+    100018: //RootNode
+    100020: Weapon_YeyanDark_Left
+    400000: ??__?__?
+    400002: __?____
+    400004: Bone023
+    400006: Bone024
+    400008: Bone025
+    400010: Box004
+    400012: Box004_0
+    400014: Camera001
+    400016: Camera001.Target
+    400018: //RootNode
+    400020: Weapon_YeyanDark_Left
+    4300000: Box004_0
+    7400000: YeyanDark_Idle_00_loop
+    7400002: YeyanDark_NormalAttack_01
+    7400004: YeyanDark_NormalAttack_02
+    7400006: YeyanDark_NormalAttack_03
+    7400008: YeyanDark_NormalAttack_04
+    7400010: YeyanDark_NormalAttack_05
+    7400012: YeyanDark_Run_loop
+    7400014: YeyanDark_SkillAttack_01_01
+    7400016: YeyanDark_SkillAttack_04_01
+    7400018: YeyanDark_SkillAttack_02_01
+    7400020: YeyanDark_RunStop
+    7400022: YeyanDark_UniqueSkill_01
+    7400024: YeyanDark_Idle_01
+    7400026: YeyanDark_SkillAttack_03_01
+    7400028: YeyanDark_Escape_loop
+    7400030: YeyanDark_Win
+    7400032: YeyanDark_SkillAttack_00_01
+    7400034: YeyanDark_AreaMove_1
+    7400036: YeyanDark_AreaMove_2
+    7400038: YeyanDark_HurtLand_Normal
+    7400040: YeyanDark_FlyUp
+    7400042: YeyanDark_HurtFly_Normal
+    7400044: YeyanDark_FlyAway
+    7400046: YeyanDark_Dead
+    7400048: YeyanDark_HurtLand_Left
+    7400050: YeyanDark_HurtLand_Right
+    7400052: YeyanDark_HurtFly_Left
+    7400054: YeyanDark_HurtFly_Right
+    7400056: YeyanDark_UniquePose
+    7400058: YeyanDark_SkillAttack_04_02
+    7400060: YeyanDark_Faint_loop
+    9500000: //RootNode
+    13700000: Box004_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

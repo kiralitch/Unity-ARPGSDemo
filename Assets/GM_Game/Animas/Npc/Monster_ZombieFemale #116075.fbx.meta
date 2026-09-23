@@ -1,0 +1,204 @@
+fileFormatVersion: 2
+guid: dc7010607a3d224459782c436b4e259c
+timeCreated: 1548317334
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: Bip01
+    100006: Bip01 Head
+    100008: Bip01 L Calf
+    100010: Bip01 L Clavicle
+    100012: Bip01 L Foot
+    100014: Bip01 L Forearm
+    100016: Bip01 L Hand
+    100018: Bip01 L Thigh
+    100020: Bip01 L Toe0
+    100022: Bip01 L UpperArm
+    100024: Bip01 Neck
+    100026: Bip01 Pelvis
+    100028: Bip01 R Calf
+    100030: Bip01 R Clavicle
+    100032: Bip01 R Foot
+    100034: Bip01 R Forearm
+    100036: Bip01 R Hand
+    100038: Bip01 R Thigh
+    100040: Bip01 R Toe0
+    100042: Bip01 R UpperArm
+    100044: Bip01 Spine
+    100046: Bip01 Spine1
+    100048: Bip01 Spine2
+    100050: Bone01_z
+    100052: Bone03_t
+    100054: Bone04_t
+    100056: Bone05_t
+    100058: Bone06_t
+    100060: Bone07
+    100062: enemy_nvjiangshi_01
+    100064: enemy_nvjiangshi_01_0
+    100066: Monster_ZombieFemale
+    100068: //RootNode
+    100070: node_back
+    100072: node_chest
+    100074: node_fix
+    100076: node_foot_left
+    100078: node_foot_point
+    100080: node_foot_right
+    100082: node_hand_left
+    100084: node_hand_right
+    100086: node_head
+    100088: node_head_point
+    100090: node_lock
+    100092: node_special_1
+    100094: node_step_left
+    100096: node_step_right
+    100098: node_weapon_left
+    100100: node_weapon_right
+    400000: ??__?__?
+    400002: __?____
+    400004: Bip01
+    400006: Bip01 Head
+    400008: Bip01 L Calf
+    400010: Bip01 L Clavicle
+    400012: Bip01 L Foot
+    400014: Bip01 L Forearm
+    400016: Bip01 L Hand
+    400018: Bip01 L Thigh
+    400020: Bip01 L Toe0
+    400022: Bip01 L UpperArm
+    400024: Bip01 Neck
+    400026: Bip01 Pelvis
+    400028: Bip01 R Calf
+    400030: Bip01 R Clavicle
+    400032: Bip01 R Foot
+    400034: Bip01 R Forearm
+    400036: Bip01 R Hand
+    400038: Bip01 R Thigh
+    400040: Bip01 R Toe0
+    400042: Bip01 R UpperArm
+    400044: Bip01 Spine
+    400046: Bip01 Spine1
+    400048: Bip01 Spine2
+    400050: Bone01_z
+    400052: Bone03_t
+    400054: Bone04_t
+    400056: Bone05_t
+    400058: Bone06_t
+    400060: Bone07
+    400062: enemy_nvjiangshi_01
+    400064: enemy_nvjiangshi_01_0
+    400066: Monster_ZombieFemale
+    400068: //RootNode
+    400070: node_back
+    400072: node_chest
+    400074: node_fix
+    400076: node_foot_left
+    400078: node_foot_point
+    400080: node_foot_right
+    400082: node_hand_left
+    400084: node_hand_right
+    400086: node_head
+    400088: node_head_point
+    400090: node_lock
+    400092: node_special_1
+    400094: node_step_left
+    400096: node_step_right
+    400098: node_weapon_left
+    400100: node_weapon_right
+    4300000: enemy_nvjiangshi_01_0
+    7400000: ZombieFemale_Idle_00_loop
+    7400002: ZombieFemale_Run_loop
+    7400004: ZombieFemale_SkillAttack_01
+    7400006: ZombieFemale_HoverBack_loop
+    7400008: ZombieFemale_HoverFront_loop
+    7400010: ZombieFemale_HoverLeft_loop
+    7400012: ZombieFemale_HoverRight_loop
+    7400014: ZombieFemale_SkillAttack_02_01
+    7400016: ZombieFemale_SkillAttack_03_01
+    7400018: ZombieFemale_SkillAttack_02_02
+    7400020: ZombieFemale_SkillAttack_02_03
+    7400022: ZombieFemale_Born_00
+    7400024: ZombieFemale_Escape_loop
+    7400026: ZombieFemale_HurtLand_Normal
+    7400028: ZombieFemale_FlyUp_Normal
+    7400030: ZombieFemale_LieBack_loop
+    7400032: ZombieFemale_StandUpBack
+    7400034: ZombieFemale_Dead
+    7400036: ZombieFemale_HurtLand_Left
+    7400038: ZombieFemale_HurtLand_Right
+    7400040: ZombieFemale_FlyUp_Left
+    7400042: ZombieFemale_FlyUp_Right
+    7400044: ZombieFemale_Bounce
+    7400046: ZombieFemale_Faint_loop
+    9500000: //RootNode
+    13700000: enemy_nvjiangshi_01_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,211 @@
+fileFormatVersion: 2
+guid: 944f28e0e8e372b4280917b6fec498f9
+timeCreated: 1548317172
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ??__?__?
+    100002: __?____
+    100004: BF_JY
+    100006: BF_JY_0
+    100008: Bone001
+    100010: Bone002
+    100012: Bone003
+    100014: Bone004
+    100016: Bone005
+    100018: Bone006
+    100020: Bone007
+    100022: Bone008
+    100024: Bone009
+    100026: Bone010
+    100028: Bone011
+    100030: Bone012
+    100032: Bone013
+    100034: Bone014
+    100036: Bone015
+    100038: Bone017
+    100040: Bone018
+    100042: Bone019
+    100044: Bone020
+    100046: Bone021
+    100048: Bone022
+    100050: Bone023
+    100052: Bone024
+    100054: Bone025
+    100056: Bone026
+    100058: Bone027
+    100060: Bone028
+    100062: Bone029
+    100064: Bone030
+    100066: Bone031
+    100068: Bone032
+    100070: Bone033
+    100072: Bone034
+    100074: Bone035
+    100076: Bone036
+    100078: Bone037
+    100080: Bone038
+    100082: Bone039
+    100084: Bone040
+    100086: Bone041
+    100088: Bone042
+    100090: Bone043
+    100092: Bone044
+    100094: //RootNode
+    100096: Monster_BatElite
+    100098: node_chest
+    100100: node_fix
+    100102: node_foot_point
+    100104: node_head
+    100106: node_head_point
+    100108: node_lock
+    400000: ??__?__?
+    400002: __?____
+    400004: BF_JY
+    400006: BF_JY_0
+    400008: Bone001
+    400010: Bone002
+    400012: Bone003
+    400014: Bone004
+    400016: Bone005
+    400018: Bone006
+    400020: Bone007
+    400022: Bone008
+    400024: Bone009
+    400026: Bone010
+    400028: Bone011
+    400030: Bone012
+    400032: Bone013
+    400034: Bone014
+    400036: Bone015
+    400038: Bone017
+    400040: Bone018
+    400042: Bone019
+    400044: Bone020
+    400046: Bone021
+    400048: Bone022
+    400050: Bone023
+    400052: Bone024
+    400054: Bone025
+    400056: Bone026
+    400058: Bone027
+    400060: Bone028
+    400062: Bone029
+    400064: Bone030
+    400066: Bone031
+    400068: Bone032
+    400070: Bone033
+    400072: Bone034
+    400074: Bone035
+    400076: Bone036
+    400078: Bone037
+    400080: Bone038
+    400082: Bone039
+    400084: Bone040
+    400086: Bone041
+    400088: Bone042
+    400090: Bone043
+    400092: Bone044
+    400094: //RootNode
+    400096: Monster_BatElite
+    400098: node_chest
+    400100: node_fix
+    400102: node_foot_point
+    400104: node_head
+    400106: node_head_point
+    400108: node_lock
+    4300000: BF_JY_0
+    7400000: BatElite_Idle_00_loop
+    7400002: BatElite_Run_loop
+    7400004: BatElite_SkillAttack_01
+    7400006: BatElite_HoverBack_loop
+    7400008: BatElite_HoverFront_loop
+    7400010: BatElite_HoverLeft_loop
+    7400012: BatElite_HoverRight_loop
+    7400014: BatElite_Born_00
+    7400016: BatElite_Escape_loop
+    7400018: BatElite_HurtLand_Normal
+    7400020: BatElite_FlyUp_Normal
+    7400022: BatElite_LieBack_loop
+    7400024: BatElite_StandUpBack
+    7400026: BatElite_Dead_Ground
+    7400028: BatElite_HurtLand_Left
+    7400030: BatElite_HurtLand_Right
+    7400032: BatElite_FlyUp_Left
+    7400034: BatElite_FlyUp_Right
+    7400036: BatElite_Bounce
+    7400038: BatElite_Faint_loop
+    7400040: BatElite_SkillAttack_02_01
+    7400042: BatElite_SkillAttack_02_02_Loop
+    7400044: BatElite_SkillAttack_02_03
+    9500000: //RootNode
+    13700000: BF_JY_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

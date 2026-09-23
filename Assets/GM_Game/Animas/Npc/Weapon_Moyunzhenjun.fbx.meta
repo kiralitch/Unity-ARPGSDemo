@@ -1,0 +1,123 @@
+fileFormatVersion: 2
+guid: c28e875bdb12bd344a7e6166390517c4
+timeCreated: 1548317264
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bone055
+    100002: Bone056
+    100004: Bone057
+    100006: Bone058
+    100008: MYZJ_wuqi
+    100010: MYZJ_wuqi_0
+    100012: //RootNode
+    100014: Weapon_Moyunzhenjun
+    400000: Bone055
+    400002: Bone056
+    400004: Bone057
+    400006: Bone058
+    400008: MYZJ_wuqi
+    400010: MYZJ_wuqi_0
+    400012: //RootNode
+    400014: Weapon_Moyunzhenjun
+    4300000: MYZJ_wuqi_0
+    7400000: Moyun_Idle_00_loop
+    7400002: Moyun_NormalAttack_01
+    7400004: Moyun_Run_loop
+    7400006: Moyun_RunStop
+    7400008: Moyun_NormalAttack_02
+    7400010: Moyun_NormalAttack_03
+    7400012: Moyun_NormalAttack_04
+    7400014: Moyun_SkillAttack_01_01
+    7400016: Moyun_SkillAttack_02_01
+    7400018: Moyun_SkillAttack_03_01
+    7400020: Moyun_UniquePose
+    7400022: Moyun_UniqueSkill_01
+    7400024: Moyun_HurtLand_Normal
+    7400026: Moyun_HurtLand_Left
+    7400028: Moyun_HurtLand_Right
+    7400030: Moyun_FlyUp
+    7400032: Moyun_FlyAway
+    7400034: Moyun_Dead
+    7400036: Moyun_HurtFly_Right
+    7400038: Moyun_HurtFly_Left
+    7400040: Moyun_HurtFly_Normal
+    7400042: Moyun_AreaMove_1
+    7400044: Moyun_AreaMove_2
+    7400046: Moyun_Faint_loop
+    7400048: Moyun_Win
+    7400050: Moyun_Idle_01
+    7400052: Moyun_Idle_02
+    7400054: Moyun_SkillAttack_04_01
+    7400056: Moyun_SkillAttack_00_01
+    9500000: //RootNode
+    13700000: MYZJ_wuqi_0
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3593f8cfefe6194c927646e7f1ae693, type: 3}
+  m_Name: HuaXiaoYanSO
+  m_EditorClassIdentifier: 
+  <GroundedData>k__BackingField:
+    <BaseSpeed>k__BackingField: 5.5
+    <AngularSpeed>k__BackingField: 360
+    <Acceleration>k__BackingField: 50
+    <StoppingDistance>k__BackingField: 0.5
+    <sightRange>k__BackingField: 20
+    <sightAngle>k__BackingField: 120
+    <obstacleMask>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 128
+    <AttackRotationReachTime>k__BackingField: 0.15
+    <AttackRange>k__BackingField: 0.6

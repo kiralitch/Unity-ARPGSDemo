@@ -33,7 +33,10 @@ public class Player_MovementStates : IState
         Debug.Log("State" + GetType().Name);
 
         stateMachine.playerRef.AnimationClipData.SetRootTarget(1, 0, 0);
-        AddInputActionsCallback();
+        if (stateMachine.playerRef.CurrentStateMode == PlayStateMode.Movement)
+        {
+            AddInputActionsCallback();
+        }
         //stateMachine.playerRef.AnimationClipData.ResetAttackAnimationTime(0);
         //stateMachine.playerRef.AnimationClipData.ResetAttackAnimationTime(1);
     }

@@ -57,7 +57,7 @@ public class Player_AttackEndState : Player_CombatCommonState
     public override void OnAnimationTransitionEvent()
     {
         MovementStateMachine.ChangeState(MovementStateMachine.IdleState);
-        MovementStateMachine.playerRef.CurrentStateMode = PlayStateMode.Movement;
+        //MovementStateMachine.playerRef.CurrentStateMode = PlayStateMode.Movement;
     }
     
 }

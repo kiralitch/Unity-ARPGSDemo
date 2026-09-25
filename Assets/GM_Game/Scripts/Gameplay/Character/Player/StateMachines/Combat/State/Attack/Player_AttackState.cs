@@ -219,8 +219,6 @@ public class Player_AttackState : Player_CombatCommonState
     }
 
     #endregion
-
-
     
     public override void OnAnimatationExitEvent()
     {
@@ -234,7 +232,7 @@ public class Player_AttackState : Player_CombatCommonState
 
     public override void OnAnimationTransitionEvent()
     {
-        CombatStateMachine.playerRef.AnimationClipData.SetRootTarget(0,1, 0);
+        //CombatStateMachine.playerRef.AnimationClipData.SetRootTarget(0,1, 0);
         CombatStateMachine.ChangeState(CombatStateMachine.AttackEndState);
     }
 }

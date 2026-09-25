@@ -38,7 +38,7 @@ public class Player_RollingState : Player_GroundedState
         //上段动画的残留通知可能持续半秒，按时间窗口丢弃，不用帧数判断
         if (TransitionEventTimer > 0f) return; 
         
-        base.OnAnimationTransitionEvent();
+        //base.OnAnimationTransitionEvent();
 
         if (stateMachine.ReusableData.MovementInput == Vector2.zero)
         {

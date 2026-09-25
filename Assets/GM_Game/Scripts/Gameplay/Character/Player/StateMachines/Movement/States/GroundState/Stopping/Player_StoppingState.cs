@@ -13,8 +13,11 @@ public class Player_StoppingState : Player_GroundedState
 
         //如果已经进入战斗模式，不再设置移动动画
         if (stateMachine.playerRef.CurrentStateMode != PlayStateMode.Movement)
-            return; 
-        
+        {
+            stateMachine.ReusableData.MovementSpeedModifier = 0f;
+            return;
+        }
+
         SetAnimationInputWeight(PlayableType.Movement, 2, 1);
         
         stateMachine.ReusableData.MovementSpeedModifier = 0f;

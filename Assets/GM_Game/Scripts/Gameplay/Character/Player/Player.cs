@@ -114,11 +114,11 @@ public class Player : CommonActor
         {
             case PlayStateMode.Movement:
                 MovementStateMachine.PhysicsUpdate();
-                BindCombatInputAciton();
+                //BindCombatInputAciton();
                 break;
             case PlayStateMode.Combat:
                 CombatStateMachine.PhysicsUpdate();
-                UnbindCombatInputAction();
+                //UnbindCombatInputAction();
                 break;
         }
         

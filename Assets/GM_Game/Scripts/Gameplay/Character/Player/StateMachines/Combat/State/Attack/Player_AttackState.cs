@@ -14,7 +14,15 @@ public class Player_AttackState : Player_CombatCommonState
 {
     /*private float maxSpeed = 10f;
     private float attackAcceleration = 20f; // 加速度*/
-    
+
+    private float AttackDashDuration = 0.15f; //前冲总时长
+    private float AttackDashSpeed = 20f; //前冲速度峰值
+    private float AttackDashTimer; //剩余前冲时间
+    private float AttackDashSpeedCached; //本次前冲速度(撞墙时可缩短)
+
+    private const float AttackRayDistance = 0.6f; //前冲检测距离
+    private const float AttackMoveSpeedMin = 1f; //前冲结束后的残留速度
+
     public Player_AttackState(Player_MovementStateMachine playerMovementStateMachine, Player_CombatStateMachine playerCombatStateMachine) : base(playerMovementStateMachine, playerCombatStateMachine)
     {
     }
@@ -30,6 +38,20 @@ public class Player_AttackState : Player_CombatCommonState
         PlayAttackAnimaiton();
     }
     
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        UpdateAttackDash();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        AttackDashTimer = 0f;
+    }
+
     #region Main
 
     private void PlayAttackAnimaiton()
@@ -67,19 +89,80 @@ public class Player_AttackState : Player_CombatCommonState
         
         Rotate(CameraYAngle);
 
-        Vector3 targetRotationDirection = GetTargetRotationDirection(CameraYAngle);
-        Vector3 horizontalVel = GetPlayerHorizontalVelocity();
+        //缓存本次前冲距离，前冲开始时一次性算完，中途不再读取技能数据
+        AttackDashSpeedCached = CachedAbilitiesData.AttackDistance;
+        AttackDashTimer = AttackDashDuration;
 
-        Vector3 NewPosition = new Vector3(GetAttackMoveSpeed(), 0f, GetAttackMoveSpeed());
-        
-        CombatStateMachine.playerRef.RigidBody.AddForce(
-            targetRotationDirection * GetAttackMoveSpeed() - horizontalVel,
-            ForceMode.Impulse
-            );
-        /*CombatStateMachine.playerRef.RigidBody.MovePosition(
-            CombatStateMachine.playerRef.RigidBody.position + NewPosition
-            );*/
+        UpdateAttackDash();
     }
+
+    /* 前冲位移，速度由峰值衰减到0，接近瞬移的手感 */
+    private void UpdateAttackDash()
+    {
+        if (AttackDashTimer <= 0f) return;
+
+        AttackDashTimer -= Time.fixedDeltaTime;
+
+        float Speed = Mathf.Lerp(
+            AttackMoveSpeedMin,
+            AttackDashSpeedCached,
+            Mathf.Clamp01(AttackDashTimer / AttackDashDuration) //从1衰减到0
+            );
+
+        Vector3 Direction = GetAttackDashDirection(AttackDashSpeedCached);
+        Quaternion targetRotation = Quaternion.Euler(0f, GetDirectionAngle(Direction), 0f);
+
+        CombatStateMachine.playerRef.RigidBody.MoveRotation(targetRotation);
+        CombatStateMachine.playerRef.RigidBody.MovePosition(
+            CombatStateMachine.playerRef.RigidBody.position + Direction * (Speed * Time.fixedDeltaTime)
+            );
+        
+        RotationAttackToTarget();
+    }
+
+    /* 算出本次前冲的实际方向，碰到墙或者悬崖先缩短距离 */
+    private Vector3 GetAttackDashDirection(float Distance)
+    {
+        Vector3 Direction = GetTargetRotationDirection(CombatStateMachine.ReusableData.CurrentAttackTargetRotation.y);
+        Direction.y = 0f;
+        Direction.Normalize();
+
+        return Direction * GetAttackDashDistance(Direction, Distance);
+    }
+
+    /* 前方有墙或者脚下没地面时缩短前冲距离，防止穿墙和飞出去 */
+    private float GetAttackDashDistance(Vector3 Direction, float Distance)
+    {
+        float RayDistance = Mathf.Max(AttackRayDistance, Distance);
+
+        if (Physics.Raycast(GetPlayerHeadPosition(), Direction, out RaycastHit hit, RayDistance, PlayerRef.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+        {
+            Distance = Mathf.Min(Distance, Mathf.Max(hit.distance - AttackMoveSpeedMin, 0f));
+        }
+        else if (!Physics.Raycast(GetPlayerHeadPosition() + Direction * Distance, Vector3.down, out _, Distance + AttackRayDistance, PlayerRef.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
+        {
+            //前方落点没有地面
+            Distance = 0f;
+        }
+
+        return Distance;
+    }
+
+    /* 胶囊体顶部往下一点，避免射线起点埋在墙里 */
+    private Vector3 GetPlayerHeadPosition()
+    {
+        return PlayerRef.transform.position + Vector3.up * AttackRayDistance;
+    }
+
+    private float GetDirectionAngle(Vector3 direction)
+    {
+        float direciontAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+        if (direciontAngle < 0f) direciontAngle += 360f;
+
+        return direciontAngle;
+    }
+
+    private Player PlayerRef => CombatStateMachine.playerRef;
 
     /* 角色刚体原有的速度 */
     private Vector3 GetPlayerHorizontalVelocity()
@@ -136,6 +219,8 @@ public class Player_AttackState : Player_CombatCommonState
     }
 
     #endregion
+
+
     
     public override void OnAnimatationExitEvent()
     {

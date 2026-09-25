@@ -18,4 +18,9 @@ public class CommonActor : MonoBehaviour, IDamageable
     {
         
     }
+
+    public virtual void PlayDeath()
+    {
+        Debug.Log("开始播放死亡动画");
+    }
 }

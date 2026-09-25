@@ -23,7 +23,7 @@ MonoBehaviour:
     - {fileID: 7400000, guid: 82aa0b4c15cbe814bb9af279c3a648cf, type: 2}
     - {fileID: 7400000, guid: 5180f157598eb4043b336d0b85ec36e3, type: 2}
     <animationSpeed>k__BackingField: 1
-    <AbilityDamage>k__BackingField: 10
+    <AbilityDamage>k__BackingField: 15
     <inputAction>k__BackingField: {fileID: 8518295178871382062, guid: 474259d90ec4f1d40bc48b73d29093c1, type: 3}
-    <AttackDistance>k__BackingField: 1
+    <AttackDistance>k__BackingField: 2.8
     <Events>k__BackingField: []

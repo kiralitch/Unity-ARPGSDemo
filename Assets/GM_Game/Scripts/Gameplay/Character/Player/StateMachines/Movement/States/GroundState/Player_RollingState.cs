@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 public class Player_RollingState : Player_GroundedState
 {
     private Player_RollingData rollingData;
-    private bool bCanAcceptTransitionEvent;
+    
+    private float TransitionEventIgnoreTime = 0.15f; //进状态后忽略这段时间内的动画通知
+    private float TransitionEventTimer;
     
     public Player_RollingState(Player_MovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
     {
@@ -17,7 +19,7 @@ public class Player_RollingState : Player_GroundedState
     {
         base.Enter();
 
-        bCanAcceptTransitionEvent = false;
+        TransitionEventTimer = TransitionEventIgnoreTime;
         
         SetAnimationInputWeight(PlayableType.Movement, 4, 1);
         stateMachine.ReusableData.MovementSpeedModifier = rollingData.SpeedModifier; //直接设置速度修正
@@ -27,15 +29,14 @@ public class Player_RollingState : Player_GroundedState
     public override void Update()
     {
         base.Update();
-        
-        //动画被重置后至少经过一帧，之后再来的过渡通知才是本段翻滚自己的
-        bCanAcceptTransitionEvent = true;
+
+        if (TransitionEventTimer > 0f) TransitionEventTimer -= Time.deltaTime;
     }
 
     public override void OnAnimationTransitionEvent()
     {
-        //丢弃进入翻滚瞬间的残留通知，修复"要按两次才能翻滚"
-        if (!bCanAcceptTransitionEvent) return; 
+        //上段动画的残留通知可能持续半秒，按时间窗口丢弃，不用帧数判断
+        if (TransitionEventTimer > 0f) return; 
         
         base.OnAnimationTransitionEvent();
 

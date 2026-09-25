@@ -287,6 +287,12 @@ public class Player : CommonActor
 
     }
 
+    public override void PlayDeath()
+    {
+        base.PlayDeath();
+        
+    }
+
     #endregion
     
 

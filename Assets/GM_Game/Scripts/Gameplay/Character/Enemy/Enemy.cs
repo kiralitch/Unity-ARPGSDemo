@@ -37,6 +37,7 @@ public class Enemy : CommonActor
     public bool bCanNotInterruptAttack = false; //攻击是否能被打断
 
     public AIC_CommonEnemy AIController { get; private set; }
+    public Rigidbody Body { get; private set; }
 
     /* 旋转用的目标节点（模型根节点），为空时回退到自身 */
     [field: SerializeField] [field:Header("旋转")]
@@ -79,7 +80,8 @@ public class Enemy : CommonActor
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
-
+        Body = GetComponent<Rigidbody>();
+        
         /* 本角色位移完全交给 NavMeshAgent，动画只负责姿势。
            若 Animator 开着 applyRootMotion，动画里的根骨骼位移会直接叠加到
            transform 上，把模型推离碰撞体（表现为模型飘在天上、骨骼被拉长），
@@ -133,6 +135,8 @@ public class Enemy : CommonActor
         AISightCoroutine = StartCoroutine(AISightCheck());
 
         RegisterBlackBoard();
+
+        RegisterDeathCallback(true);
     }
 
     private void OnDisable()
@@ -140,6 +144,7 @@ public class Enemy : CommonActor
         AnimationGraph.Destroy();
         
         StopCoroutine(AISightCoroutine);
+        RegisterDeathCallback(false);
     }
 
     #region 接口实现
@@ -163,8 +168,6 @@ public class Enemy : CommonActor
 
     }
     
-    #endregion
-
     /* 受伤后播放受击动画 */
     public override void PlayHitReaction(CommonActor Executor)
     {
@@ -183,6 +186,28 @@ public class Enemy : CommonActor
         MovementStateMachine.HitReactState.SetExecutorRef(Executor);
         MovementStateMachine.ChangeState(MovementStateMachine.HitReactState);
     }
+
+    private void RegisterDeathCallback(bool bIsRegister)
+    {
+        if (bIsRegister)
+        {
+            CommonAssetData.EnemyCommonData.OnDeathCall += PlayDeath;
+        }
+        else
+        {
+            CommonAssetData.EnemyCommonData.OnDeathCall -= PlayDeath;
+        }
+    }
+
+    public override void PlayDeath()
+    {
+        if (CommonAssetData.EnemyCommonData.CurrentHealth > 0f) return;
+        
+        base.PlayDeath();
+        
+    }
+    
+    #endregion
 
     private void RegisterBlackBoard()
     {

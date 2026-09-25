@@ -23,6 +23,7 @@ public class Shared_CommonData
     public float CommonDefence { get; private set; } = 5f;
     
     public event Action<float> OnHealthChange; //绑定事件
+    public event Action OnDeathCall;
 
     public virtual void InitData()
     {
@@ -36,10 +37,15 @@ public class Shared_CommonData
         set
         {
             var CachedDamege = value;
-            CachedDamege /= CommonDefence;
+            CachedDamege -= CommonDefence;
             
             CurrentHealth -= CachedDamege;
-            OnHealthChange?.Invoke(CachedDamege);
+            OnHealthChange?.Invoke(CachedDamege); //UI改变
+
+            if (CurrentHealth <= 0f)
+            {
+                OnDeathCall?.Invoke();
+            }
         }
     }
 }

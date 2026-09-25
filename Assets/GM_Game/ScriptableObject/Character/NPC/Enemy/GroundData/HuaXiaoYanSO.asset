@@ -24,3 +24,8 @@ MonoBehaviour:
       m_Bits: 128
     <AttackRotationReachTime>k__BackingField: 0.15
     <AttackRange>k__BackingField: 0.6
+    <HitKnockbackDistance>k__BackingField: 1.5
+    <HitKnockbackDuration>k__BackingField: 0.2
+    <HitFacingReachTime>k__BackingField: 0.1
+    <bUseRigidbodyKnockback>k__BackingField: 0
+    <HitKnockbackDrag>k__BackingField: 12

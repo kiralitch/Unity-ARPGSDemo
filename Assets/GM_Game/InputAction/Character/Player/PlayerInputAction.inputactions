@@ -166,6 +166,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Lock",
+                    "type": "Button",
+                    "id": "a0e31c1e-f1bc-4d53-aa0e-466ba413e50e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -177,6 +186,45 @@
                     "processors": "",
                     "groups": "",
                     "action": "LightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "59e8178f-2ac4-42c9-bd1e-9b670979f122",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Lock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UIMangerInput",
+            "id": "f36316ed-cdac-437d-871e-6013371e1412",
+            "actions": [
+                {
+                    "name": "EscUI",
+                    "type": "Button",
+                    "id": "8f7a86d7-1dd8-4689-b104-d900d650604a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ebd3157c-8ea4-4523-b2d8-fb4b21511146",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EscUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

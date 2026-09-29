@@ -11,6 +11,7 @@ public class Enemy_MovementStateMachine : StateMachine
 
     //受击与死亡
     public Enemy_HitReact HitReactState { get; }
+    public Enemy_Death DeathState { get; }
 
     public Enemy_MovementStateMachine(Enemy enemy)
     {
@@ -20,5 +21,6 @@ public class Enemy_MovementStateMachine : StateMachine
         RunningState = new Enemy_RunningState(this);
         
         HitReactState = new Enemy_HitReact(this);
+        DeathState = new Enemy_Death(this);
     }
 }

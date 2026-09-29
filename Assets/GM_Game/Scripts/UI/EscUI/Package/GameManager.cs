@@ -41,18 +41,53 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         //打开游戏自动打开背包界面
-        StartCoroutine(WaitOpenPanel());
+        //StartCoroutine(WaitOpenPanel());
         //EscUIManager.GetInstance.OpenPanel(UIConst.PackagePanel);
+    }
+
+    #region 玩家调用
+
+    public bool bIsEscUIOpen = false;
+    
+    public void OpenPanel()
+    {
+        StartCoroutine(WaitOpenPanel());
+    }
+
+    public void ClosePanel()
+    {
+        StartCoroutine(WaitClosePanel());
     }
 
     private IEnumerator WaitOpenPanel()
     {
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
         PackageTable = GetPackageTable();
         yield return new WaitForSeconds(0.5f);
-        EscUIManager.GetInstance.OpenPanel(UIConst.PackagePanel);
+        EscUIManager.GetInstance.OpenPanel(UIConst.PackagePanel, SetBIsPanelOpen);
     }
 
+    private void SetBIsPanelOpen(BasePanel obj)
+    {
+        if (EscUIManager.GetInstance.GetPanel(UIConst.PackagePanel) == obj)
+        {
+            bIsEscUIOpen = true;
+        }
+        else
+        {
+            bIsEscUIOpen = false;
+        }
+    }
+
+    private IEnumerator WaitClosePanel()
+    {
+        yield return new WaitForSeconds(0.5f);
+        EscUIManager.GetInstance.ClosePanel(UIConst.PackagePanel);
+        bIsEscUIOpen = false;
+    }
+
+    #endregion
+    
     private void Update()
     {
         /*if (Input.GetKey(KeyCode.Space))

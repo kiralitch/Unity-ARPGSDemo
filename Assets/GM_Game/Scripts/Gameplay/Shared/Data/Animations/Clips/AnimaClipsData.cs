@@ -103,20 +103,18 @@ public class AnimaClipsData
         if (CommonReactionTargets.Length > 0) CommonReactionTargets[0] = 1f;
         
         //创建攻击混合器
-        /* 第三个参数 normalizeWeights 必须显式传 false。
-           默认 true 时混合器会把每个输入权重除以权重总和，一旦所有端口权重
-           同时为 0（例如上一段攻击结束、ClearEnemyCombo 刚把权重清零，
-           或连招切换时端口被重建的中间帧），除以 0 会得到非法权重，
-           混合结果退化成绑定姿势——表现就是骨骼被拉长、模型浮在原点上方。
-           这里关闭归一化，由代码保证两个端口权重之和恒为 1 */
-        AttackMixer = AnimationMixerPlayable.Create(RootGraph, 2, false);
+        /* 注意：AnimationMixerPlayable 的 normalizeWeights 参数在 Unity 2022.3 已废弃，
+           传任何值都不会生效，混合器始终按「输入权重加权求和」工作。
+           因此端口权重之和必须由代码自己维持在 1 附近，
+           UpdateBlend 里的 NormalizeRootWeights / NormalizeAttackWeights 就是做这件事的 */
+        AttackMixer = AnimationMixerPlayable.Create(RootGraph, 2);
         attackTargets = new float[2];
         attackTargets[0] = 1f;
         
         //InitializeAttackMixer(graph);
         
         //根混合器连接
-        RootMixer = AnimationMixerPlayable.Create(RootGraph, 3, false); //暂时设置移动和攻击两节点
+        RootMixer = AnimationMixerPlayable.Create(RootGraph, 3); //移动、攻击、通用反应三路
         RootGraph.Connect(MovementMixer, 0, RootMixer, 0);
         RootGraph.Connect(AttackMixer, 0, RootMixer, 1);
         RootGraph.Connect(CommonReactionMixer, 0, RootMixer, 2);
@@ -173,9 +171,9 @@ public class AnimaClipsData
         float newAttack = Mathf.Lerp(currentAttack, targetAttackWeight, t);
         float newCommon = Mathf.Lerp(CurrentCommonReacation, targetCommonReactionWeight, t);
 
-        /* RootMixer 关闭了自动归一化，三个权重必须由代码显式归一化。
-           否则过渡过程中三者之和可能偏离 1：大于 1 会让动画过冲，
-           小于 1 会让混合结果向绑定姿势收敛（骨骼被拉长）。
+        /* 混合器本身不会归一化权重（normalizeWeights 参数已废弃且无效），
+           三个权重之和必须由代码维持：和大于 1 会让动画过冲，
+           和小于 1 会让混合结果向绑定姿势收敛（骨骼被拉长）。
            AttackMixer 同理，两个端口权重在这里一并归一化 */
         NormalizeRootWeights(ref newMove, ref newAttack, ref newCommon);
 
@@ -552,5 +550,4 @@ public class AnimaClipsData
     }
 
     #endregion
-    
 }

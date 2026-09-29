@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 /*
@@ -49,6 +50,11 @@ public class Player : CommonActor
     public Player_CombatStateMachine CombatStateMachine;
 
     public PlayStateMode CurrentStateMode = PlayStateMode.Movement;
+
+    [field:SerializeField]
+    public Transform PlayerCinemachineClass { get; private set; }
+
+    private CameraLockIn CameraLockinClass;
     
     //TODO 测试
     public static Player Instance { get; private set; }
@@ -72,7 +78,8 @@ public class Player : CommonActor
         MainCameraTransform = Camera.main.transform;
 
         PlayerHUD = GetComponent<HUDManager>();
-        
+
+        CameraLockinClass = PlayerCinemachineClass.GetComponent<CameraLockIn>();
         //AnimationGraph = AnimationClipData.Initialize(animator, AnimationGraph);
         //CharacterBone = FindCharacterBoneByName(transform, "Bip001");
     }
@@ -87,8 +94,25 @@ public class Player : CommonActor
     {
         CommonAssetData.commonData.InitData();
         MovementStateMachine.ChangeState(MovementStateMachine.IdleState);
+        BindUIInputAction(true);
+        BindMouseLockInInputAction();
         //AnimationGraph.Play();
         //if(PlayerWeaponHitBox != null) Debug.Log("碰撞体初始化成功");
+    }
+
+    private void OnEnable()
+    {
+        AnimationGraph = AnimationClipData.Initialize(animator, AnimationGraph);
+        
+        BindCombatInputAciton();
+    }
+
+    private void OnDisable()
+    {
+        AnimationGraph.Destroy();
+
+        UnbindCombatInputAction();
+        BindUIInputAction(false);
     }
 
     private void Update()
@@ -127,36 +151,47 @@ public class Player : CommonActor
     
     public void OnMovementStateAnimationEnterEvent()
     {
+        if (ShouldRouteAnimationEventToCombat())
+        {
+            CombatStateMachine.OnAnimationEnterEvent();
+            return;
+        }
+
         MovementStateMachine.OnAnimationEnterEvent();
-        CombatStateMachine.OnAnimationEnterEvent();
     }
     
     public void OnMovementStateAnimationExitEvent()
     {
+        if (ShouldRouteAnimationEventToCombat())
+        {
+            CombatStateMachine.OnAnimationExitEvent();
+            return;
+        }
+
         MovementStateMachine.OnAnimationExitEvent();
-        CombatStateMachine.OnAnimationExitEvent();
     }
     
     public void OnMovementStateAnimationTransitionEvent()
     {
+        //攻击/收招动画的关键帧事件只走战斗状态机。
+        if (ShouldRouteAnimationEventToCombat())
+        {
+            CombatStateMachine.OnAnimationTransitionEvent();
+            return;
+        }
+
         MovementStateMachine.OnAnimationTransitionEvent();
-        CombatStateMachine.OnAnimationTransitionEvent();
     }
 
-    private void OnEnable()
+    /* 战斗状态机是否正持有动画层。
+     * AttackState/AttackEndState 播放期间根权重在攻击层，此时的动画通知属于攻击流程；
+     * 一旦被翻滚等移动状态打断（CombatCommonState），根权重已交还移动层，
+     * 攻击动画残留的通知就不能再影响移动状态机 */
+    private bool ShouldRouteAnimationEventToCombat()
     {
-        AnimationGraph = AnimationClipData.Initialize(animator, AnimationGraph);
-        
-        BindCombatInputAciton();
-    }
+        var CombatState = CombatStateMachine.GetCurrentState();
 
-
-
-    private void OnDisable()
-    {
-        AnimationGraph.Destroy();
-
-        UnbindCombatInputAction();
+        return CombatState is Player_AttackState || CombatState is Player_AttackEndState;
     }
 
     #region 技能绑定/解绑函数
@@ -294,6 +329,52 @@ public class Player : CommonActor
     }
 
     #endregion
-    
 
+    #region UI菜单绑定
+
+    private void BindUIInputAction(bool b)
+    {
+        if (b)
+        {
+            playerInput.UIInputActions.EscUI.started += OpenOrClosePanel;
+        }
+        else
+        {
+            playerInput.UIInputActions.EscUI.started -= OpenOrClosePanel;
+        }
+
+    }
+
+    private void OpenOrClosePanel(InputAction.CallbackContext obj)
+    {
+        GameManager gameManager = GameManager.GetInstance;
+        //如果未打开，则打开面板
+        if (!gameManager.bIsEscUIOpen)
+        {
+            gameManager.OpenPanel();
+        }
+        else
+        {
+            gameManager.ClosePanel();
+        }
+    }
+
+    #endregion
+
+    #region InputAction
+
+    private void BindMouseLockInInputAction()
+    {
+        playerInput.CombatInputActions.Lock.started += ToggleLockin;
+
+    }
+
+    private void ToggleLockin(InputAction.CallbackContext obj)
+    {
+        if (CameraLockinClass == null) return;
+        
+        CameraLockinClass.ToggleLock();
+    }
+
+    #endregion
 }

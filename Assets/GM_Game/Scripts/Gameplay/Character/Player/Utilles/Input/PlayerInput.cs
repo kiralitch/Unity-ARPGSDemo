@@ -12,12 +12,14 @@ public class PlayerInput : MonoBehaviour
     public PlayerInputAction InputActions { get; private set; }
     public PlayerInputAction.PlayerInputActions PlayerActions { get; private set; }
     public PlayerInputAction.PlayerCombatInputActions CombatInputActions { get; private set; }
+    public PlayerInputAction.UIMangerInputActions UIInputActions { get; private set; }
 
     private void Awake()
     {
         InputActions = new PlayerInputAction();
         PlayerActions = InputActions.PlayerInput; //实例化
         CombatInputActions = InputActions.PlayerCombatInput;
+        UIInputActions = InputActions.UIMangerInput;
     }
 
     /* 在对象激活时可用 */
@@ -25,6 +27,7 @@ public class PlayerInput : MonoBehaviour
     {
         PlayerActions.Enable();
         CombatInputActions.Enable();
+        UIInputActions.Enable();
     }
 
     /* 在对象禁用时时不可用 */
@@ -32,6 +35,7 @@ public class PlayerInput : MonoBehaviour
     {
         PlayerActions.Disable();
         CombatInputActions.Disable();
+        UIInputActions.Disable();
     }
 
     /* 无法使用输入 */

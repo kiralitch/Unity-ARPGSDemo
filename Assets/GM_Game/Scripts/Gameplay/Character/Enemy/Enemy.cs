@@ -1,8 +1,11 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Playables;
 
+/*
+ * 敌人类
+ * 
+ */
 
 public class Enemy : CommonActor
 {
@@ -24,7 +27,7 @@ public class Enemy : CommonActor
     public Enemy_MovementStateMachine MovementStateMachine;
     public Enemy_CombatStateMachine CombatStateMachine;
 
-    public EnemyStateMode CurrentStateMode { get; private set; }
+    public EnemyStateMode CurrentStateMode { get; set; }
 
     [field:SerializeField]
     public Transform HitBoxesTrans { get; private set; }
@@ -141,9 +144,17 @@ public class Enemy : CommonActor
 
     private void OnDisable()
     {
-        AnimationGraph.Destroy();
+        if (AnimationGraph.IsValid())
+        {
+            AnimationGraph.Destroy();
+        }
         
-        StopCoroutine(AISightCoroutine);
+        if (AISightCoroutine != null)
+        {
+            StopCoroutine(AISightCoroutine);
+            AISightCoroutine = null;
+        }
+
         RegisterDeathCallback(false);
     }
 
@@ -153,6 +164,8 @@ public class Enemy : CommonActor
     {
         CommonAssetData.EnemyCommonData.SetCurrentHealthDamage = damage;
         Debug.Log($"{Executor.GetType()}对敌人造成当前伤害： {damage},敌人当前血量：{CommonAssetData.EnemyCommonData.CurrentHealth}");
+
+        if (!CommonAssetData.EnemyCommonData.CheckIsHaveHealth()) return;
 
         if (bCanNotInterruptAttack)
         {
@@ -175,12 +188,12 @@ public class Enemy : CommonActor
            否则一次受击之后敌人会永久卡在攻击保护里不再出手 */
         AIController.SetAttacking(false);
 
+        CombatStateMachine.ChangeState(CombatStateMachine.CombatCommonState);
+        
         /* 必须清掉 Attack 这个黑板值：SetBlackBoardValue 只在值发生变化时回调，
            如果 Attack 一直残留为 true，之后敌人再也无法再次触发攻击回调 */
         AIController.ResetAllBlackboard();
-
-        CombatStateMachine.ChangeState(CombatStateMachine.CombatCommonState);
-
+        
         AnimationClipData.ClearEnemyCombo(AnimationGraph);
         
         MovementStateMachine.HitReactState.SetExecutorRef(Executor);
@@ -199,14 +212,93 @@ public class Enemy : CommonActor
         }
     }
 
+    /* 播放死亡动画 */
     public override void PlayDeath()
     {
         if (CommonAssetData.EnemyCommonData.CurrentHealth > 0f) return;
         
         base.PlayDeath();
         
+        AIController.SetAttacking(false);
+        AIController.ResetAllBlackboard();
+
+        CombatStateMachine.ChangeState(CombatStateMachine.CombatCommonState);
+
+        if (AISightCoroutine != null)
+        {
+            StopCoroutine(AISightCoroutine);
+            AISightCoroutine = null;
+        }
+
+        MovementStateMachine.ChangeState(MovementStateMachine.DeathState);
     }
     
+    #endregion
+
+    #region 死亡销毁
+    
+    public override void DestroyOnDeath()
+    {
+        base.DestroyOnDeath();
+
+        StopDeathRuntime();
+        StartCoroutine(DestroyAtEndOfFrame());
+    }
+
+    /* 停掉所有还在跑的逻辑：AI 视协程、黑板、寻路与物理。
+       协程必须在这里停，因为 OnDisable 时 StopCoroutine(null) 会告警，
+       而销毁流程结束后协程已经无法再安全访问组件 */
+    private void StopDeathRuntime()
+    {
+        AIController?.SetAttacking(false);
+        AIController?.ResetAllBlackboard();
+
+        if (AISightCoroutine != null)
+        {
+            StopCoroutine(AISightCoroutine);
+            AISightCoroutine = null;
+        }
+
+        var Agent = AIController != null ? AIController.Agent : null;
+        if (Agent != null && Agent.enabled)
+        {
+            Agent.isStopped = true;
+            Agent.enabled = false;
+        }
+
+        /* 死亡后不该再参与受击与碰撞：禁掉刚体并关掉所有碰撞体，
+           否则尸体在动画结束的这一帧还能被打中并触发一次新的死亡流程 */
+        if (Body != null)
+        {
+            Body.velocity = Vector3.zero;
+            Body.angularVelocity = Vector3.zero;
+            Body.isKinematic = true;
+            Body.detectCollisions = false;
+        }
+
+        var Colliders = GetComponentsInChildren<Collider>();
+        for (int i = 0; i < Colliders.Length; i++)
+        {
+            Colliders[i].enabled = false;
+        }
+        
+        
+    }
+
+    /* 等到当前帧结束再销毁。
+       动画退出事件是在 PlayableGraph 求值过程中回调进来的，
+       在这个时机直接 Destroy 会让正在使用的 Animator / PlayableGraph 立刻失效，
+       本帧剩余的逻辑（其他动画事件、状态机 Update）会拿到已销毁对象。
+       等一帧结束后再销毁，销毁动作和动画求值不会重叠 */
+    private IEnumerator DestroyAtEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+
+        /* 销毁 GameObject 会触发 OnDisable，那里会释放 PlayableGraph 并解绑死亡回调，
+           这里不需要再做一次，避免重复释放 */
+        Destroy(gameObject);
+    }
+
     #endregion
 
     private void RegisterBlackBoard()
@@ -219,7 +311,8 @@ public class Enemy : CommonActor
     private void AttackCallBack(bool obj)
     {
         if (!obj) return;
-
+        if (CurrentStateMode == EnemyStateMode.Death) return;
+        
         Debug.Log("进入攻击范围");
 
         EnemyAbilityData ability = GetRandomAbility();

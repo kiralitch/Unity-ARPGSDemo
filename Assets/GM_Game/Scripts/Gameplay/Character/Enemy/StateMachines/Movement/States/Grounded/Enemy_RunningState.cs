@@ -23,9 +23,9 @@ public class Enemy_RunningState : Enemy_GroundedState
         /* 与 Idle 对称：攻击/受击期间 ChasePlayer 被清掉，
            这里若继续判断就会和 Idle 来回切换，战斗接管期间必须冻结 */
         if (IsCombatBusy()) return;
-
         if (stateMachine.EnemyRef.AIController.GetBlackBoardValue("ChasePlayer")) return;
-
+        if (stateMachine.EnemyRef.CurrentStateMode == EnemyStateMode.Death) return;
+        
         stateMachine.ChangeState(stateMachine.IdleState);
     }
 }

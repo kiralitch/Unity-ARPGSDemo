@@ -15,6 +15,7 @@ public class EscUIManager : SingleTon<EscUIManager>
     public Dictionary<string, GameObject> prefabDict; //预制体缓存字典
     public Dictionary<string, BasePanel> panelDict; //已打开界面缓存字典
     
+    [SerializeField]
     private Transform _uiRoot; //UI根节点
 
     public Transform GetUIRoot
@@ -23,10 +24,10 @@ public class EscUIManager : SingleTon<EscUIManager>
         {
             if (_uiRoot == null)
             {
-                if (GameObject.Find("Canvas"))
-                    _uiRoot = GameObject.Find("Canvas").transform;
+                if (GameObject.Find("PlayerHUD/Canvas"))
+                    _uiRoot = GameObject.Find("PlayerHUD/Canvas").transform;
                 else
-                    _uiRoot = new GameObject("Canvas").transform;
+                    _uiRoot = new GameObject("PlayerHUD/Canvas").transform;
             };
             return _uiRoot;
         }

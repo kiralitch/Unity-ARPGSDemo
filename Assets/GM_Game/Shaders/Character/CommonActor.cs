@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /*
@@ -22,5 +20,13 @@ public class CommonActor : MonoBehaviour, IDamageable
     public virtual void PlayDeath()
     {
         Debug.Log("开始播放死亡动画");
+    }
+    
+    /* 死亡处理区域 */
+    /* 死亡动画播完后的销毁入口，由动画退出事件里调用。
+   这里负责把销毁前必须做干净的收尾步骤一次性做完： */
+    public virtual void DestroyOnDeath()
+    {
+        if (!gameObject.activeInHierarchy) return;
     }
 }

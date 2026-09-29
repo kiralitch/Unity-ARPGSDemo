@@ -19,11 +19,13 @@ public enum PlayableType
 public enum PlayStateMode
 {
     Movement,
-    Combat
+    Combat,
+    Death
 }
 
 public enum EnemyStateMode
 {
     Movement,
-    Combat
+    Combat,
+    Death
 }

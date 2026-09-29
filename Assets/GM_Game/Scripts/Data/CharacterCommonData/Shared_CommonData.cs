@@ -48,4 +48,9 @@ public class Shared_CommonData
             }
         }
     }
+
+    public bool CheckIsHaveHealth()
+    {
+        return CurrentHealth > 0f ? true : false;
+    }
 }

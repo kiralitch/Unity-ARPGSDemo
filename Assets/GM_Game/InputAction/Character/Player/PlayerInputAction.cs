@@ -252,6 +252,15 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0e31c1e-f1bc-4d53-aa0e-466ba413e50e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -263,6 +272,45 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59e8178f-2ac4-42c9-bd1e-9b670979f122"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""UIMangerInput"",
+            ""id"": ""f36316ed-cdac-437d-871e-6013371e1412"",
+            ""actions"": [
+                {
+                    ""name"": ""EscUI"",
+                    ""type"": ""Button"",
+                    ""id"": ""8f7a86d7-1dd8-4689-b104-d900d650604a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""ebd3157c-8ea4-4523-b2d8-fb4b21511146"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EscUI"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -281,12 +329,17 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         // PlayerCombatInput
         m_PlayerCombatInput = asset.FindActionMap("PlayerCombatInput", throwIfNotFound: true);
         m_PlayerCombatInput_LightAttack = m_PlayerCombatInput.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerCombatInput_Lock = m_PlayerCombatInput.FindAction("Lock", throwIfNotFound: true);
+        // UIMangerInput
+        m_UIMangerInput = asset.FindActionMap("UIMangerInput", throwIfNotFound: true);
+        m_UIMangerInput_EscUI = m_UIMangerInput.FindAction("EscUI", throwIfNotFound: true);
     }
 
     ~@PlayerInputAction()
     {
         UnityEngine.Debug.Assert(!m_PlayerInput.enabled, "This will cause a leak and performance issues, PlayerInputAction.PlayerInput.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_PlayerCombatInput.enabled, "This will cause a leak and performance issues, PlayerInputAction.PlayerCombatInput.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UIMangerInput.enabled, "This will cause a leak and performance issues, PlayerInputAction.UIMangerInput.Disable() has not been called.");
     }
 
     /// <summary>
@@ -503,6 +556,7 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerCombatInput;
     private List<IPlayerCombatInputActions> m_PlayerCombatInputActionsCallbackInterfaces = new List<IPlayerCombatInputActions>();
     private readonly InputAction m_PlayerCombatInput_LightAttack;
+    private readonly InputAction m_PlayerCombatInput_Lock;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerCombatInput".
     /// </summary>
@@ -518,6 +572,10 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerCombatInput/LightAttack".
         /// </summary>
         public InputAction @LightAttack => m_Wrapper.m_PlayerCombatInput_LightAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerCombatInput/Lock".
+        /// </summary>
+        public InputAction @Lock => m_Wrapper.m_PlayerCombatInput_Lock;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -547,6 +605,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @LightAttack.started += instance.OnLightAttack;
             @LightAttack.performed += instance.OnLightAttack;
             @LightAttack.canceled += instance.OnLightAttack;
+            @Lock.started += instance.OnLock;
+            @Lock.performed += instance.OnLock;
+            @Lock.canceled += instance.OnLock;
         }
 
         /// <summary>
@@ -561,6 +622,9 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @LightAttack.started -= instance.OnLightAttack;
             @LightAttack.performed -= instance.OnLightAttack;
             @LightAttack.canceled -= instance.OnLightAttack;
+            @Lock.started -= instance.OnLock;
+            @Lock.performed -= instance.OnLock;
+            @Lock.canceled -= instance.OnLock;
         }
 
         /// <summary>
@@ -594,6 +658,102 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerCombatInputActions" /> instance referencing this action map.
     /// </summary>
     public PlayerCombatInputActions @PlayerCombatInput => new PlayerCombatInputActions(this);
+
+    // UIMangerInput
+    private readonly InputActionMap m_UIMangerInput;
+    private List<IUIMangerInputActions> m_UIMangerInputActionsCallbackInterfaces = new List<IUIMangerInputActions>();
+    private readonly InputAction m_UIMangerInput_EscUI;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "UIMangerInput".
+    /// </summary>
+    public struct UIMangerInputActions
+    {
+        private @PlayerInputAction m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public UIMangerInputActions(@PlayerInputAction wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "UIMangerInput/EscUI".
+        /// </summary>
+        public InputAction @EscUI => m_Wrapper.m_UIMangerInput_EscUI;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_UIMangerInput; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="UIMangerInputActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(UIMangerInputActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="UIMangerInputActions" />
+        public void AddCallbacks(IUIMangerInputActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIMangerInputActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIMangerInputActionsCallbackInterfaces.Add(instance);
+            @EscUI.started += instance.OnEscUI;
+            @EscUI.performed += instance.OnEscUI;
+            @EscUI.canceled += instance.OnEscUI;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="UIMangerInputActions" />
+        private void UnregisterCallbacks(IUIMangerInputActions instance)
+        {
+            @EscUI.started -= instance.OnEscUI;
+            @EscUI.performed -= instance.OnEscUI;
+            @EscUI.canceled -= instance.OnEscUI;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIMangerInputActions.UnregisterCallbacks(IUIMangerInputActions)" />.
+        /// </summary>
+        /// <seealso cref="UIMangerInputActions.UnregisterCallbacks(IUIMangerInputActions)" />
+        public void RemoveCallbacks(IUIMangerInputActions instance)
+        {
+            if (m_Wrapper.m_UIMangerInputActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="UIMangerInputActions.AddCallbacks(IUIMangerInputActions)" />
+        /// <seealso cref="UIMangerInputActions.RemoveCallbacks(IUIMangerInputActions)" />
+        /// <seealso cref="UIMangerInputActions.UnregisterCallbacks(IUIMangerInputActions)" />
+        public void SetCallbacks(IUIMangerInputActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIMangerInputActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIMangerInputActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="UIMangerInputActions" /> instance referencing this action map.
+    /// </summary>
+    public UIMangerInputActions @UIMangerInput => new UIMangerInputActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "PlayerInput" which allows adding and removing callbacks.
     /// </summary>
@@ -651,5 +811,27 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLightAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Lock" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLock(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UIMangerInput" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="UIMangerInputActions.AddCallbacks(IUIMangerInputActions)" />
+    /// <seealso cref="UIMangerInputActions.RemoveCallbacks(IUIMangerInputActions)" />
+    public interface IUIMangerInputActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "EscUI" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEscUI(InputAction.CallbackContext context);
     }
 }

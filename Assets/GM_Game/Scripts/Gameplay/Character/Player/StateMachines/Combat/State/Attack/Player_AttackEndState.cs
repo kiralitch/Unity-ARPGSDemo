@@ -17,7 +17,7 @@ public class Player_AttackEndState : Player_CombatCommonState
     {
         base.Enter();
         
-        CombatStateMachine.playerRef.CurrentStateMode = PlayStateMode.Movement;
+        MovementStateMachine.playerRef.CurrentStateMode = PlayStateMode.Movement;
         PlayAttackEndAnimaiton();
     }
 
@@ -56,8 +56,10 @@ public class Player_AttackEndState : Player_CombatCommonState
 
     public override void OnAnimationTransitionEvent()
     {
+        //收招动画播完才把控制权交还移动状态机。
+        //顺序很重要：先切模式（让 Player.FixedUpdate 开始驱动 MovementStateMachine），
+        //再切状态，避免出现「模式是 Combat 但移动状态已切走」的空档
         MovementStateMachine.ChangeState(MovementStateMachine.IdleState);
-        //MovementStateMachine.playerRef.CurrentStateMode = PlayStateMode.Movement;
     }
     
 }

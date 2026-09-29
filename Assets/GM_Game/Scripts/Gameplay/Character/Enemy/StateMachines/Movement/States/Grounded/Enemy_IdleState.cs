@@ -25,9 +25,9 @@ public class Enemy_IdleState : Enemy_GroundedState
            而 Running 又因为 ChasePlayer 为假立刻切回来，两帧一循环造成抽搐。
            战斗接管期间移动状态机完全冻结 */
         if (IsCombatBusy()) return;
-
         if (stateMachine.EnemyRef.AIController.GetBlackBoardValue("Idle")) return;
-
+        if (stateMachine.EnemyRef.CurrentStateMode == EnemyStateMode.Death) return;
+        
         ChangeMoveState();
     }
 }

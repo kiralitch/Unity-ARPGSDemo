@@ -68,6 +68,7 @@ public class SharedWeaponHitBox : MonoBehaviour
         var DamegeInterface = HitTarget.GetComponent<IDamageable>();
         if (DamegeInterface != null && SelfRef != null)
         {
+            
             DamegeInterface.TakeDamage(CachedDamage, SelfRef);
             Debug.Log($"命中目标 {HitTarget.name}，造成 {CachedDamage}点伤害");
         }

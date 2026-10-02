@@ -11,6 +11,9 @@ public class Enemy : CommonActor
 {
     [field:SerializeField]
     public Enemy_CommonSO CommonAssetData { get; private set; }
+
+    /* 运行时的基础数据 */
+    public Enemy_CommonData RuntimeCommonData { get; private set; }
     
     [field:SerializeField][field:Header("移动基础数据")]
     public Enemy_SO CommonSO { get; private set; }
@@ -105,16 +108,25 @@ public class Enemy : CommonActor
 
         HitBoxUtils = HitBoxesTrans.GetComponentInChildren<SharedWeaponHitBox>();
 
-        if (CommonAssetData.EnemyCommonData.CurrentHealth < CommonAssetData.EnemyCommonData.MaxHealth)
+        /* 克隆一份运行时血量数据，避免多个敌人共享同一个 SO 资产实例。
+           必须在任何读写 CurrentHealth / 订阅事件之前完成，
+           否则事件会挂到共享资产上，导致一个敌人死亡时所有敌人一起死 */
+        var clone = Instantiate(CommonAssetData);
+        if (clone != null)
         {
-            CommonAssetData.EnemyCommonData.CurrentHealth = CommonAssetData.EnemyCommonData.MaxHealth;
+            RuntimeCommonData = clone.EnemyCommonData;
+        }
+
+        if (RuntimeCommonData.CurrentHealth < RuntimeCommonData.MaxHealth)
+        {
+            RuntimeCommonData.CurrentHealth = RuntimeCommonData.MaxHealth;
         }
     }
 
     private void Start()
     {
         CurrentStateMode = EnemyStateMode.Movement;
-        CommonAssetData.EnemyCommonData.InitData();
+        RuntimeCommonData.InitData();
         MovementStateMachine.ChangeState(MovementStateMachine.IdleState);
     }
 
@@ -162,10 +174,10 @@ public class Enemy : CommonActor
 
     public override void TakeDamage(float damage, CommonActor Executor)
     {
-        CommonAssetData.EnemyCommonData.SetCurrentHealthDamage = damage;
-        Debug.Log($"{Executor.GetType()}对敌人造成当前伤害： {damage},敌人当前血量：{CommonAssetData.EnemyCommonData.CurrentHealth}");
+        RuntimeCommonData.SetCurrentHealthDamage = damage;
+        Debug.Log($"{Executor.GetType()}对敌人造成当前伤害： {damage},敌人当前血量：{RuntimeCommonData.CurrentHealth}");
 
-        if (!CommonAssetData.EnemyCommonData.CheckIsHaveHealth()) return;
+        if (!RuntimeCommonData.CheckIsHaveHealth()) return;
 
         if (bCanNotInterruptAttack)
         {
@@ -202,20 +214,25 @@ public class Enemy : CommonActor
 
     private void RegisterDeathCallback(bool bIsRegister)
     {
+        if (RuntimeCommonData == null) return;
+
         if (bIsRegister)
         {
-            CommonAssetData.EnemyCommonData.OnDeathCall += PlayDeath;
+            /* 先减再加以防重复订阅：OnEnable 可能被多次触发，
+               重复挂载会让一次死亡回调执行多次 PlayDeath */
+            RuntimeCommonData.OnDeathCall -= PlayDeath;
+            RuntimeCommonData.OnDeathCall += PlayDeath;
         }
         else
         {
-            CommonAssetData.EnemyCommonData.OnDeathCall -= PlayDeath;
+            RuntimeCommonData.OnDeathCall -= PlayDeath;
         }
     }
 
     /* 播放死亡动画 */
     public override void PlayDeath()
     {
-        if (CommonAssetData.EnemyCommonData.CurrentHealth > 0f) return;
+        if (RuntimeCommonData.CurrentHealth > 0f) return;
         
         base.PlayDeath();
         
@@ -418,13 +435,13 @@ public class Enemy : CommonActor
 
             if (target != null)
             {
-                CommonSO.GroundedData.CachedPlayerTransform = target;
+                AIController.CachedPlayerTransform = target;
                 AIController.SetSightBlackBoardValue("Idle", false);
                 AIController.SetSightBlackBoardValue("ChasePlayer");
             }
             else
             {
-                CommonSO.GroundedData.CachedPlayerTransform = null;
+                AIController.CachedPlayerTransform = null;
                 AIController.SetSightBlackBoardValue("ChasePlayer", false);
                 AIController.SetSightBlackBoardValue("Idle");
             }

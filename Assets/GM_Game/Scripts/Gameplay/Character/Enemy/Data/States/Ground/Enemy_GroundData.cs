@@ -57,8 +57,6 @@ public class Enemy_GroundData
     [field: SerializeField] [field:Range(0f, 30f)]
     public float HitKnockbackDrag { get; private set; } = 12f;
 
-    public Transform CachedPlayerTransform { get; set; }
-
     /* 按「距离 / 时间」反推初速度，让角色在忽略阻力时正好滑出 Distance 米 */
     public float HitKnockbackSpeed => HitKnockbackDistance / Mathf.Max(HitKnockbackDuration, 0.01f);
     

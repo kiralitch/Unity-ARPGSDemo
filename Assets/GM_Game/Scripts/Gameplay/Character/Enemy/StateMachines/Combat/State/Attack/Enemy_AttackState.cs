@@ -94,11 +94,6 @@ public class Enemy_AttackState : Enemy_CombatCommonState
             return;
         }
 
-        /* 调试用：死亡竞态排查，确认攻击状态在死亡后是否还会被重新进入 */
-        Debug.LogError($"[死亡排查] {CachedEnemy.name} 重新进入攻击状态，当前移动状态=" +
-                       $"{MovementStateMachine.GetCurrentState()?.GetType().Name}，" +
-                       $"CurrentStateMode={CachedEnemy.CurrentStateMode}");
-
         CachedClipsData.PlayEnemyComboClip(
             CachedAbilityData,
             CachedEnemy.AnimationGraph

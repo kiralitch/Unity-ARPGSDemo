@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using YooAsset;
@@ -15,11 +14,14 @@ public class EscUIManager : SingleTon<EscUIManager>
     public Dictionary<string, GameObject> prefabDict; //预制体缓存字典
     public Dictionary<string, BasePanel> panelDict; //已打开界面缓存字典
     
-    [SerializeField]
     private Transform _uiRoot; //UI根节点
 
-    public Transform GetUIRoot
+    public Transform UIRoot
     {
+        set
+        {
+            if (value != null) _uiRoot = value;
+        }
         get
         {
             if (_uiRoot == null)
@@ -111,7 +113,7 @@ public class EscUIManager : SingleTon<EscUIManager>
     /* 加载完成后需要添加进字典里并打开界面 */
     private void CreatePanel(string name, GameObject prefab, Action<BasePanel> onOpened)
     {
-        GameObject panelObj = GameObject.Instantiate(prefab, GetUIRoot); //实例化UI预制体，并将其挂到UI根节点下
+        GameObject panelObj = GameObject.Instantiate(prefab, _uiRoot); //实例化UI预制体，并将其挂到UI根节点下
         BasePanel panel = panelObj.GetComponent<BasePanel>();
         if (panel == null)
         {

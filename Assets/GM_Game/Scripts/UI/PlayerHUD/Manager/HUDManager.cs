@@ -16,7 +16,7 @@ public class HUDManager : MonoBehaviour
     private void Awake()
     {
         PlayerRef = GetComponent<Player>();
-        HealthBar.SetPlayerMaxHealth(PlayerRef.CommonAssetData.commonData.MaxHealth);
+        HealthBar.SetMaxHealth(PlayerRef.CommonAssetData.commonData.MaxHealth);
         StamaniBar.SetPlayerMaxStamina(PlayerRef.CommonAssetData.commonData.MaxStamina);
     }
 

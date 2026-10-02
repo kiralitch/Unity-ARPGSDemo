@@ -17,24 +17,26 @@ public class AIC_CommonEnemy : CommonAIController
 
         AISight = new Enemy_AISight();
         EnemyRef = enemy;
+
+        /* 为每个敌人克隆一份自己的黑板数据。
+           AIBlackBoardData 是共享的 ScriptableObject 资产，直接读它的 Values
+           会让所有敌人共用同一个黑板列表：一个敌人的 Idle/ChasePlayer/Attack
+           变化会被其它敌人读到，表现为多个敌人行为完全同步。
+           克隆后每个敌人各写各的黑板，互不影响 */
         if (EnemyRef != null && EnemyRef.AIBlackBoardData != null)
         {
-            EnemyBlackBoard = EnemyRef.AIBlackBoardData.Values;
+            BlackBoardSO clone = Instantiate(EnemyRef.AIBlackBoardData);
+            EnemyBlackBoard = clone != null ? clone.Values : null;
         }
     }
 
     #region 玩家位置
 
-    /* 当前锁定的玩家（视野检测成功后缓存，丢失视野则为 null） */
-    public Transform CachedPlayerTransform
-    {
-        get
-        {
-            if (EnemyRef == null || EnemyRef.CommonSO == null) return null;
-
-            return EnemyRef.CommonSO.GroundedData.CachedPlayerTransform;
-        }
-    }
+    /* 当前锁定的玩家（视野检测成功后缓存，丢失视野则为 null）。
+       存在本控制器实例上，不写进共享的 Enemy_SO.GroundedData：
+       那是 ScriptableObject 资产，多敌人会共用同一个引用，
+       后检测到的敌人会把先检测到的覆盖掉，导致追击目标互相串 */
+    public Transform CachedPlayerTransform { get; set; }
 
     /* 判断当前是否持有有效的玩家目标 */
     public bool HasPlayerTarget()

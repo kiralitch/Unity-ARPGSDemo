@@ -11,6 +11,8 @@ using YooAsset;
 
 public class GameManager : MonoBehaviour
 {
+    public Transform PlayerUIRoot;
+    
     private static GameManager instance;
     private static object InstanceLock = new object(); //线程同步的锁对象
 
@@ -35,6 +37,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        if (PlayerUIRoot != null) 
+            EscUIManager.GetInstance.UIRoot = PlayerUIRoot;
+        
         DontDestroyOnLoad(gameObject);
     }
 

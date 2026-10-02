@@ -15,33 +15,33 @@ public class CameraLockIn : MonoBehaviour
     public float LockRange { get; private set; } = 15f;
 
     [field: SerializeField][field: Range(0f, 360f)]
-    [field: Tooltip("以相机正前方为中轴的搜索锥全角。360 表示不做角度过滤")]
+    [field: Tooltip("以相机正前方为中轴的搜索锥全角")]
     public float LockSearchAngle { get; private set; } = 120f;
 
     [field: Header("锁定表现")]
     [field: SerializeField][field: Range(0.5f, 30f)]
-    [field: Tooltip("锁定期间视角转向敌人的速度。越小越慢越稳，越大越跟手")]
+    [field: Tooltip("锁定期间视角转向敌人的速度")]
     public float LockRotateSpeed { get; private set; } = 4f;
 
     [field: SerializeField]
-    [field: Tooltip("看向敌人的高度偏移。应填敌人体型的中上部（例如 0.9 高的敌人填 0.55），过大就会仰得离谱")]
+    [field: Tooltip("看向敌人的高度偏移")]
     public float AimHeightOffset { get; private set; } = 0.55f;
 
     [field: SerializeField][field: Range(0f, 2f)]
-    [field: Tooltip("锁定期间把观察支点抬高的量（米）。0.9 高的小人填 0.45 即抬到胸口高度，相机就会平视/略仰看敌人")]
+    [field: Tooltip("锁定期间把观察支点抬高的量")]
     public float PivotLift { get; private set; } = 0.45f;
 
     [field: Header("解锁条件")]
     [field: SerializeField][field: Range(0.5f, 60f)]
-    [field: Tooltip("锁定期间目标超出这个距离自动解锁。应大于搜索半径，避免在边界反复锁解")]
+    [field: Tooltip("锁定期间目标超出这个距离自动解锁")]
     public float BreakLockDistance { get; private set; } = 20f;
 
     [field: SerializeField]
-    [field: Tooltip("敌人之间是否用射线做遮挡检测。开启后墙后的敌人不会被锁定")]
+    [field: Tooltip("敌人之间是否用射线做遮挡检测")]
     public bool bCheckObstacle { get; private set; } = true;
 
     [field: SerializeField]
-    [field: Tooltip("遮挡检测使用的层。未配置时退化为不做遮挡检测")]
+    [field: Tooltip("遮挡检测使用的层")]
     public LayerMask ObstacleMask { get; private set; }
 
     /* 被锁定的敌人。敌人死亡被销毁后 Unity 会把它判为空，用于自动解锁 */
@@ -129,6 +129,7 @@ public class CameraLockIn : MonoBehaviour
         if (ShouldBreakLock())
         {
             Unlock();
+            Player.Instance.SetLockInCamera(bIsLocked);
             return;
         }
 
@@ -141,14 +142,14 @@ public class CameraLockIn : MonoBehaviour
            这里 Unity 的假空判断会直接命中，必须先判 null 再读血量 */
         if (LockedEnemy == null) return true;
 
-        if (!LockedEnemy.CommonAssetData.EnemyCommonData.CheckIsHaveHealth()) return true;
-
+        if (!LockedEnemy.RuntimeCommonData.CheckIsHaveHealth()) return true;
+        
         float Distance = Vector3.Distance(transform.position, LockedEnemy.transform.position);
 
         return Distance > BreakLockDistance;
     }
 
-    /* 把 POV 的水平/垂直角度平滑地推向「相机 -> 敌人」的方向。
+    /* 插值设置Pov角度
        不直接赋值而是插值，否则锁定/解锁瞬间视角会瞬移 */
     private void RotatePovTowardsTarget()
     {
@@ -280,17 +281,15 @@ public class CameraLockIn : MonoBehaviour
         CameraForward.y = 0f;
         if (CameraForward.sqrMagnitude < 0.0001f) CameraForward = Vector3.forward;
 
-        for (int i = 0; i < HitColliders.Length; i++)
+        foreach (var HitCollider in HitColliders)
         {
-            Collider HitCollider = HitColliders[i];
-
-            /* 敌人用 Tag 标识。场景里的敌人 Layer 是 Default 而不是 Enemy 层，
-               所以这里跟随仓库既有做法用 Tag，而不是 LayerMask */
+            //Collider HitCollider = HitColliders[i];
+            
             if (!HitCollider.CompareTag("Enemy")) continue;
 
             Enemy Candidate = HitCollider.GetComponentInParent<Enemy>();
             if (Candidate == null) continue;
-            if (!Candidate.CommonAssetData.EnemyCommonData.CheckIsHaveHealth()) continue;
+            if (!Candidate.RuntimeCommonData.CheckIsHaveHealth()) continue;
 
             Vector3 ToCandidate = Candidate.transform.position - transform.position;
             ToCandidate.y = 0f;
@@ -302,10 +301,12 @@ public class CameraLockIn : MonoBehaviour
             float Angle = Vector3.Angle(CameraForward, ToCandidate);
             if (Angle > LockSearchAngle / 2f) continue;
 
+            //检测是否阻挡
             if (bCheckObstacle && IsBlocked(ToCandidate.normalized, Distance)) continue;
 
             bool bBetter = Angle < BestAngle - 0.01f
-                           || (Mathf.Abs(Angle - BestAngle) <= 0.01f && Distance < BestDistance);
+                           || (Mathf.Abs(Angle - BestAngle) <= 0.01f 
+                               && Distance < BestDistance);
 
             if (!bBetter) continue;
 

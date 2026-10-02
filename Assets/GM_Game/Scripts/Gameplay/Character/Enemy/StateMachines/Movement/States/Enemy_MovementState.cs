@@ -88,7 +88,7 @@ public class Enemy_MovementState : IState
         if (stateMachine.EnemyRef.AIController.GetBlackBoardValue("ChasePlayer"))
         {
             stateMachine.EnemyRef.AIController.AIOnMove(
-                stateMachine.EnemyRef.CommonSO.GroundedData.CachedPlayerTransform
+                stateMachine.EnemyRef.AIController.CachedPlayerTransform
                 );
         }
     }

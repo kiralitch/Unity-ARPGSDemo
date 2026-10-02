@@ -37,6 +37,27 @@ public class PlayerInput : MonoBehaviour
         CombatInputActions.Disable();
         UIInputActions.Disable();
     }
+    
+    public void SetInputAbleNoneUI(bool bSetAble)
+    {
+        bool bAllEnabled = PlayerActions.enabled && CombatInputActions.enabled;
+        bool bAllDisabled = !PlayerActions.enabled && !CombatInputActions.enabled;
+
+        if (bSetAble)
+        {
+            if (bAllEnabled) return;
+
+            PlayerActions.Enable();
+            CombatInputActions.Enable();
+        }
+        else
+        {
+            if (bAllDisabled) return;
+
+            PlayerActions.Disable();
+            CombatInputActions.Disable();
+        }
+    }
 
     /* 无法使用输入 */
     public void DisableActionInput(InputAction action, float seconds)

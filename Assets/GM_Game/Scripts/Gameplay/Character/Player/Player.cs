@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -55,7 +58,8 @@ public class Player : CommonActor
     public Transform PlayerCinemachineClass { get; private set; }
 
     private CameraLockIn CameraLockinClass;
-    
+    private CameraInputSet CameraInput;
+
     //TODO 测试
     public static Player Instance { get; private set; }
 
@@ -80,6 +84,7 @@ public class Player : CommonActor
         PlayerHUD = GetComponent<HUDManager>();
 
         CameraLockinClass = PlayerCinemachineClass.GetComponent<CameraLockIn>();
+        CameraInput = PlayerCinemachineClass.GetComponent<CameraInputSet>();
         //AnimationGraph = AnimationClipData.Initialize(animator, AnimationGraph);
         //CharacterBone = FindCharacterBoneByName(transform, "Bip001");
     }
@@ -195,28 +200,44 @@ public class Player : CommonActor
     }
 
     #region 技能绑定/解绑函数
+
+    //readonly只读，运行时常量
+    private readonly Dictionary<AbilitiesData, Action<InputAction.CallbackContext>> CombatInputCallbacks
+        = new Dictionary<AbilitiesData, Action<InputAction.CallbackContext>>();
+
     //通过绑定能力数据里的输入，然后单个检测不同技能不同按键
     private void BindCombatInputAciton()
     {
         if (Abilities == null) return;
-        
+
         foreach (var Ability in Abilities.AbilitiesList)
         {
-            if (Ability.inputAction != null && Ability.inputAction.action != null)
-            {
-                Ability.inputAction.action.started += ctx => OnAttackInput(Ability);
-            }
+            if (Ability == null) continue;
+            if (Ability.inputAction == null || Ability.inputAction.action == null) continue;
+
+            /* 已经注册过就跳过，避免重复绑定导致一次输入触发多次攻击 */
+            if (CombatInputCallbacks.ContainsKey(Ability)) continue;
+
+            Action<InputAction.CallbackContext> Callback = ctx => OnAttackInput(Ability);
+
+            CombatInputCallbacks[Ability] = Callback;
+            Ability.inputAction.action.started += Callback;
         }
     }
 
     private void UnbindCombatInputAction()
     {
+        if (Abilities == null) return;
+
         foreach (var Ability in Abilities.AbilitiesList)
         {
-            if (Ability.inputAction != null && Ability.inputAction.action != null)
-            {
-                Ability.inputAction.action.started -= ctx => OnAttackInput(Ability);
-            }
+            if (Ability == null) continue;
+            if (Ability.inputAction == null || Ability.inputAction.action == null) continue;
+
+            if (!CombatInputCallbacks.TryGetValue(Ability, out var Callback)) continue;
+
+            Ability.inputAction.action.started -= Callback;
+            CombatInputCallbacks.Remove(Ability);
         }
     }
 
@@ -352,10 +373,28 @@ public class Player : CommonActor
         if (!gameManager.bIsEscUIOpen)
         {
             gameManager.OpenPanel();
+            SetUIInputAllMethon(false);
         }
         else
         {
             gameManager.ClosePanel();
+            SetUIInputAllMethon(true);
+        }
+    }
+
+    public void SetUIInputAllMethon(bool bSet)
+    {
+        if (bSet)
+        {
+            playerInput.SetInputAbleNoneUI(bSet);
+            BindCombatInputAciton();
+            CameraInput.SetAllInput(bSet);
+        }
+        else
+        {
+            playerInput.SetInputAbleNoneUI(bSet);
+            UnbindCombatInputAction();
+            CameraInput.SetAllInput(bSet);
         }
     }
 
@@ -374,6 +413,14 @@ public class Player : CommonActor
         if (CameraLockinClass == null) return;
         
         CameraLockinClass.ToggleLock();
+        SetLockInCamera(CameraLockinClass.bIsLocked);
+    }
+
+    public void SetLockInCamera(bool bSet)
+    {
+        if (CameraInput == null) return;
+        
+        CameraInput.SetWhenLockInCamera(bSet);
     }
 
     #endregion

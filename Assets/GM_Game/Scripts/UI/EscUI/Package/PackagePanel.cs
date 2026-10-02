@@ -153,6 +153,8 @@ public class PackagePanel : BasePanel
     {
         print(">OnClickClose");
         ClosePanel();
+        
+        Player.Instance.SetUIInputAllMethon(true);
     }
     
     private void OnDelectBack()

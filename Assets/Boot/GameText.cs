@@ -1,8 +1,31 @@
+using System;
+using Unity.VisualScripting;
 using YooAsset;
 using UnityEngine;
 
 public class GameLauncher : MonoBehaviour
 {
+    public event Action OnYooAssetInitCall;
+    
+    private static GameLauncher instance;
+    private static object InstanceLock = new object(); //线程同步的锁对象
+    
+    public static GameLauncher GetInstance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                lock (InstanceLock) //检查后加锁，防止多线程同时访问
+                {
+                    if (instance == null) {  instance = new GameLauncher(); }
+                }
+            }
+            
+            return instance;
+        }
+    }
+    
     private async void Start()
     {
         // 初始化 YooAssets
@@ -29,6 +52,8 @@ public class GameLauncher : MonoBehaviour
 
         if (initOperation.Status == EOperationStatus.Succeed)
         {
+            OnYooAssetInitCall?.Invoke();
+            
             Debug.Log("YooAsset 初始化成功，当前模式：" +
 #if UNITY_EDITOR
                       "编辑器模拟模式"

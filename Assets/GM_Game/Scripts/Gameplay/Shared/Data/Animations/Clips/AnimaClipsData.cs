@@ -53,13 +53,19 @@ public class AnimaClipsData
     
     public PlayableGraph Initialize(Animator animator, PlayableGraph RootGraph)
     {
-        this.graph = RootGraph;
-        
         if (!RootGraph.IsValid())
         {
             RootGraph = PlayableGraph.Create("PlayerAnimationGraph");
             RootGraph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
         }
+
+        /* 必须在确认图有效之后再记录到字段上。
+           PlayableGraph 是结构体、按值传递：若在有效性检查之前 this.graph = RootGraph，
+           当传入的图已被 Destroy（对象池复用会先 Destroy 再重建），
+           这里创建的新图只会赋给局部变量，this.graph 仍指向那张已失效的图，
+           后续 PreloadNextEnemyComboIfNeeded 里 graph.IsValid() 恒为 false，
+           连招第二段起就不再预缓存 */
+        this.graph = RootGraph;
 
         /* 移动动画 */
         MovementMixer = AnimationMixerPlayable.Create(RootGraph);
@@ -264,18 +270,7 @@ public class AnimaClipsData
         SetRootTarget(0f, 1f, 0f); // 保持攻击权重
     }
 
-    /* 在指定端口上设置攻击动画，并把播放时间与播放结束标记复位。
-     *
-     * 为什么不用「Destroy 旧节点再 Connect 新节点」：
-     * AttackMixer 是 AnimationMixerPlayable，端口在求值时若为空，
-     * 混合结果会退化成绑定姿势（骨骼被拉回 rig 默认姿态）。
-     * Disconnect 之后到 Connect 之前虽然在同一函数内，但只要端口曾经空过，
-     * 该端口上的旧 Clip 引用就已经失效，后续每段连招都会命中这个空档，
-     * 表现就是「第一招正常，之后每一招骨骼被拉长」。
-     *
-     * 因此这里采用「端口常驻」策略：
-     * 旧节点只断开、不销毁，句柄记录在 PendingDestroy 里，
-     * 等新节点连好之后统一回收，保证端口全程有效。 */
+    /* 在指定端口上设置攻击动画，并把播放时间与播放结束标记复位 */
     private AnimationClipPlayable CreateAttackPlayable(
         PlayableGraph graph,
         AnimationClip clip,
@@ -390,11 +385,7 @@ public class AnimaClipsData
     private int EnemyComboPreloadPort =>
         EnemyComboActivePort == attackInputPort ? attackEndInputPort : attackInputPort;
 
-    /* 播放敌人连招的第一段
-     * ability 为本次攻击使用的技能数据，会重置连招进度从第 0 段开始。
-     * 双端口乒乓：端口0 播放第 N 段时，端口1 已经缓存好第 N+1 段，
-     * 切换时只需交换权重，动画切换在同一帧完成，不会出现空端口导致绑定姿势。
-     * 敌人没有收招动画，连招一直播到最后一段为止。 */
+    /* 播放敌人连招的第一段 */
     public bool PlayEnemyComboClip(EnemyAbilityData ability, PlayableGraph graph)
     {
         if (ability == null)
@@ -431,15 +422,8 @@ public class AnimaClipsData
         return true;
     }
 
-    /* 推进到下一段连招：交换端口，当前段播完后由预缓存段接管。
-     * 已是最后一段时返回 false，由调用方决定如何结束攻击。
-     *
-     * 注意：这里刻意不在切换后立刻给腾空的端口预缓存下一段。
-     * CreateAttackPlayable 会 Disconnect + Connect，改变该端口的输入对象，
-     * 而 AnimationMixerPlayable 在输入被替换的那一帧会重建内部混合缓冲，
-     * 该帧求值会闪出绑定姿势（表现为第一招切第二招时闪一下骨骼拉长）。
-     * 预缓存推迟到下一帧由 PreloadNextEnemyComboIfNeeded 完成，
-     * 保证「权重交接」和「端口重建」永远不在同一帧发生 */
+    /* 交换端口，当前段播完后由预缓存段接管。
+     * 已是最后一段时返回 false，由调用方决定如何结束攻击 */
     public bool PlayNextEnemyComboClip(PlayableGraph graph)
     {
         if (!bHasNextEnemyCombo) return false;
@@ -528,10 +512,7 @@ public class AnimaClipsData
     }
 
     /* 结束敌人攻击
-     * 这里不释放端口节点，只把权重清零。原因：
-     * AnimationMixerPlayable 的端口一旦为空，混合结果会退化成绑定姿势；
-     * 而权重是逐帧插值回落的，若此时端口已空，回落过程中的每一帧都会混进绑定姿势。
-     * 端口节点留着不占额外开销（下一轮攻击会被复用），比断开更安全 */
+     * 这里不释放端口节点，只把权重清零 */
     public void ClearEnemyCombo(PlayableGraph graph)
     {
         if (!AttackMixer.IsValid()) return;

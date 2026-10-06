@@ -38,6 +38,12 @@ public class AIC_CommonEnemy : CommonAIController
        后检测到的敌人会把先检测到的覆盖掉，导致追击目标互相串 */
     public Transform CachedPlayerTransform { get; set; }
 
+    /* 清空锁定的玩家目标（对象池复用时调用，避免带上一轮的目标出生） */
+    public void ResetCachedPlayer()
+    {
+        CachedPlayerTransform = null;
+    }
+
     /* 判断当前是否持有有效的玩家目标 */
     public bool HasPlayerTarget()
     {

@@ -31,7 +31,7 @@ public class PackageDetailPanel : MonoBehaviour
     public void RefreshDetailPanel(PackageLocalItem localData, PackagePanel UIRoot)
     {
         packageLocalItem = localData;
-        PackageTableItem = GameManager.GetInstance.GetPackageItemByID(packageLocalItem.id);
+        PackageTableItem = GameUIManager.GetInstance.GetPackageItemByID(packageLocalItem.id);
         UIParent = UIRoot;
 
         UITitle.GetComponent<Text>().text = PackageTableItem.name;

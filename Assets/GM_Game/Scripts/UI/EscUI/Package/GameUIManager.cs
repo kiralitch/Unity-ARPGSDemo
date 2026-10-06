@@ -9,16 +9,16 @@ using YooAsset;
  * 
  */
 
-public class GameManager : MonoBehaviour
+public class GameUIManager : MonoBehaviour
 {
     public Transform PlayerUIRoot;
     
-    private static GameManager instance;
+    private static GameUIManager instance;
     private static object InstanceLock = new object(); //线程同步的锁对象
 
     private PackageTableSO PackageTable; //静态数据处理
     
-    public static GameManager GetInstance
+    public static GameUIManager GetInstance
     {
         get
         {
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
             {
                 lock (InstanceLock) //检查后加锁，防止多线程同时访问
                 {
-                    if (instance == null) {  instance = new GameManager(); }
+                    if (instance == null) {  instance = new GameUIManager(); }
                 }
             }
             

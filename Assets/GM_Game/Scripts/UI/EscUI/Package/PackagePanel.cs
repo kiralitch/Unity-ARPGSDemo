@@ -59,7 +59,7 @@ public class PackagePanel : BasePanel
 
     private void RefreshDetail()
     {
-        PackageLocalItem localItem = GameManager.GetInstance.GetPackageLocalItemByUID(chooseItemUid);
+        PackageLocalItem localItem = GameUIManager.GetInstance.GetPackageLocalItemByUID(chooseItemUid);
         //刷新
         UIDetailPanel.GetComponent<PackageDetailPanel>().RefreshDetailPanel(localItem, this);
         //取消之前选中图片
@@ -70,7 +70,7 @@ public class PackagePanel : BasePanel
     private void FreshLastItemSelectImage()
     {
         if (LastChooseItemUid == null) return;
-        PackageLocalItem LastChooseItem = GameManager.GetInstance.GetPackageLocalItemByUID(LastChooseItemUid);
+        PackageLocalItem LastChooseItem = GameUIManager.GetInstance.GetPackageLocalItemByUID(LastChooseItemUid);
 
         var ScrollContext = UIScrollView.GetComponent<ScrollRect>().content; //获取滚动条context父节点
         for (int i = 0; i < ScrollContext.childCount; i++)
@@ -128,7 +128,7 @@ public class PackagePanel : BasePanel
         }
 
         //根据排序后的背包数据重新创建并初始化每一个物品格子
-        foreach (var packageLocalData in GameManager.GetInstance.GetSortPackageLocalData())
+        foreach (var packageLocalData in GameUIManager.GetInstance.GetSortPackageLocalData())
         {
             //实例化物品格子的预制体，并挂到Content下
             Transform packageUIItem = Instantiate(PackageUIItemPrefab.transform, ScrollContext);

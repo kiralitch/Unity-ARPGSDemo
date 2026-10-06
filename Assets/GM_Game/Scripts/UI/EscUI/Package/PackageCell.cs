@@ -57,7 +57,7 @@ public class PackageCell : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
     {
         //获取物品动态和静态数据
         packageLocalItem = packageLocalData;
-        PackageTableItem = GameManager.GetInstance.GetPackageItemByID(packageLocalItem.id);
+        PackageTableItem = GameUIManager.GetInstance.GetPackageItemByID(packageLocalItem.id);
         UIParent = packagePanel;
         
         //物品名称

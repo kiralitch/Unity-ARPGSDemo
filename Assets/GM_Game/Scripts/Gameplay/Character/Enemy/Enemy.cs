@@ -7,7 +7,7 @@ using UnityEngine.Playables;
  * 
  */
 
-public class Enemy : CommonActor
+public class Enemy : CommonActor, IPoolable
 {
     [field:SerializeField]
     public Enemy_CommonSO CommonAssetData { get; private set; }
@@ -55,6 +55,8 @@ public class Enemy : CommonActor
 
     public Transform RotationTransform => RotationRoot != null ? RotationRoot : transform;
 
+    private EnemyUIManager UIManager;
+    
     /* 在指定时间内平滑地把角色朝向旋转到目标方向，用 ref 保存平滑速度 */
     public void RotateTowards(Vector3 Direction, float ReachTime)
     {
@@ -88,13 +90,14 @@ public class Enemy : CommonActor
         animator = GetComponentInChildren<Animator>();
         Body = GetComponent<Rigidbody>();
         
-        /* 本角色位移完全交给 NavMeshAgent，动画只负责姿势。
-           若 Animator 开着 applyRootMotion，动画里的根骨骼位移会直接叠加到
-           transform 上，把模型推离碰撞体（表现为模型飘在天上、骨骼被拉长），
-           同时和 Agent 的转向互相打架导致抖动，这里强制关掉 */
         if (animator != null)
         {
             animator.applyRootMotion = false;
+        }
+        
+        if (Body != null)
+        {
+            Body.interpolation = RigidbodyInterpolation.None;
         }
 
         MovementStateMachine = new Enemy_MovementStateMachine(this);
@@ -107,7 +110,8 @@ public class Enemy : CommonActor
         }
 
         HitBoxUtils = HitBoxesTrans.GetComponentInChildren<SharedWeaponHitBox>();
-
+        UIManager = GetComponent<EnemyUIManager>();
+        
         /* 克隆一份运行时血量数据，避免多个敌人共享同一个 SO 资产实例。
            必须在任何读写 CurrentHealth / 订阅事件之前完成，
            否则事件会挂到共享资产上，导致一个敌人死亡时所有敌人一起死 */
@@ -253,13 +257,25 @@ public class Enemy : CommonActor
     #endregion
 
     #region 死亡销毁
-    
+
+    /* 没挂 = 非池对象，死亡走 Destroy；挂了且 OwnerPool 有效 = 还池复用 */
+    private PooledObject PooledRef
+    {
+        get
+        {
+            if (PooledObjectRef == null) PooledObjectRef = GetComponent<PooledObject>();
+            return PooledObjectRef;
+        }
+    }
+
+    private PooledObject PooledObjectRef;
+
     public override void DestroyOnDeath()
     {
         base.DestroyOnDeath();
 
         StopDeathRuntime();
-        StartCoroutine(DestroyAtEndOfFrame());
+        StartCoroutine(FinishDeathAtEndOfFrame());
     }
 
     /* 停掉所有还在跑的逻辑：AI 视协程、黑板、寻路与物理。
@@ -298,21 +314,20 @@ public class Enemy : CommonActor
         {
             Colliders[i].enabled = false;
         }
-        
-        
     }
 
-    /* 等到当前帧结束再销毁。
-       动画退出事件是在 PlayableGraph 求值过程中回调进来的，
-       在这个时机直接 Destroy 会让正在使用的 Animator / PlayableGraph 立刻失效，
-       本帧剩余的逻辑（其他动画事件、状态机 Update）会拿到已销毁对象。
-       等一帧结束后再销毁，销毁动作和动画求值不会重叠 */
-    private IEnumerator DestroyAtEndOfFrame()
+    /* 等到当前帧结束再收尾
+       是对象池时还给池；非池对象时Destroy */
+    private IEnumerator FinishDeathAtEndOfFrame()
     {
         yield return new WaitForEndOfFrame();
 
-        /* 销毁 GameObject 会触发 OnDisable，那里会释放 PlayableGraph 并解绑死亡回调，
-           这里不需要再做一次，避免重复释放 */
+        /* 销毁 / 隐藏 GameObject 都会触发 OnDisable，那里会释放 PlayableGraph并解绑死亡回调 */
+        if (PooledRef != null && PooledRef.ReturnToPool())
+        {
+            yield break;
+        }
+
         Destroy(gameObject);
     }
 
@@ -448,6 +463,99 @@ public class Enemy : CommonActor
 
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    #endregion
+
+    #region 对象池接口
+
+    /* 从池中取出后复位 */
+    public void OnPoolGet()
+    {
+        if (RuntimeCommonData != null)
+        {
+            RuntimeCommonData.InitData(); // CurrentHealth = MaxHealth
+        }
+
+        CurrentStateMode = EnemyStateMode.Movement;
+
+        AIController?.SetAttacking(false);
+        AIController?.ResetAllBlackboard();
+        AIController?.ResetCachedPlayer();
+
+        if(UIManager != null) UIManager.InitHealthBar();
+        
+        /* 还原 AI 寻路。
+           先把 Agent 的内部位置 Warp 到当前的出生点，再恢复寻路：
+           复用取出时 Agent 内部还停在上一世死亡的位置，直接启用会先「瞬移」回旧点
+           再折返，看起来就是出生后疯跑一段。
+           注意：Warp 前必须先确保 Agent 处于启用状态且在 NavMesh 上 */
+        var Agent = AIController != null ? AIController.Agent : null;
+        if (Agent != null)
+        {
+            Agent.enabled = true;
+            Agent.isStopped = true;
+
+            /* Agent 的 transform 已经被池的取出流程摆到出生点，这里同步内部位置 */
+            if (UnityEngine.AI.NavMesh.SamplePosition(transform.position, out UnityEngine.AI.NavMeshHit Hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
+            {
+                Agent.Warp(Hit.position);
+            }
+
+            Agent.ResetPath();
+            Agent.isStopped = false;
+        }
+
+        /* 还原刚体与碰撞。
+           关键：刚体必须保持 Kinematic。
+           本角色是「Kinematic 刚体 + NavMeshAgent 直接写 transform」的移动方式，
+           刚体只作为碰撞代理，位移全部由 Agent 负责。
+           一旦把它改回非 Kinematic（动态），重力与物理求解器就会和 Agent 抢方向：
+           表现为移动时模型往后飘、速度忽快忽慢，停下（攻击）时又被弹回胶囊体位置。
+           插值同样保持关闭，避免渲染用的 transform 滞后于碰撞体所在的实际位置 */
+        if (Body != null)
+        {
+            Body.velocity = Vector3.zero;
+            Body.angularVelocity = Vector3.zero;
+            Body.isKinematic = true;
+            Body.detectCollisions = true;
+            Body.interpolation = RigidbodyInterpolation.None;
+        }
+
+        /* 还原自身碰撞体（死亡时被 StopDeathRuntime 全部关掉了）。
+           武器命中盒不在自身碰撞体里，它由攻击状态在出手瞬间开关，出生时必须是关的 */
+        var Colliders = GetComponentsInChildren<Collider>(true);
+        for (int i = 0; i < Colliders.Length; i++)
+        {
+            Colliders[i].enabled = true;
+        }
+
+        /* 单独关掉武器命中盒：它是 trigger，出生前不该参与命中判定 */
+        if (HitBoxUtils != null)
+        {
+            HitBoxUtils.DisableHitBox();
+        }
+
+        ResetRotationVelocity();
+
+        MovementStateMachine?.ChangeState(MovementStateMachine.IdleState);
+    }
+
+    /* 回收进池前清理。
+       SetActive(false) 会触发 OnDisable，里面已负责停视野协程、解绑死亡回调、释放 PlayableGraph，
+       这里只做状态层面的兜底，避免残留影响下一次复用 */
+    public void OnPoolReturn()
+    {
+        if (RuntimeCommonData != null)
+        {
+            RuntimeCommonData.InitData();
+        }
+        
+        AIController?.SetAttacking(false);
+        AIController?.ResetAllBlackboard();
+        AIController?.ResetCachedPlayer();
+
+        CombatStateMachine?.ChangeState(CombatStateMachine.CombatCommonState);
     }
 
     #endregion

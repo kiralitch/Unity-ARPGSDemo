@@ -368,7 +368,7 @@ public class Player : CommonActor
 
     private void OpenOrClosePanel(InputAction.CallbackContext obj)
     {
-        GameManager gameManager = GameManager.GetInstance;
+        GameUIManager gameManager = GameUIManager.GetInstance;
         //如果未打开，则打开面板
         if (!gameManager.bIsEscUIOpen)
         {

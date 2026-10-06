@@ -68,7 +68,7 @@ public class EnemyUIManager : MonoBehaviour
         bar.SetMaxHealth(data.MaxHealth);
         HealthGroup = bar.GetComponent<CanvasGroup>();
 
-        data.OnHealthChange += BindHealthBarChanged;
+        //data.OnHealthChange += BindHealthBarChanged;
     }
 
     private void OnDisable()
@@ -92,14 +92,21 @@ public class EnemyUIManager : MonoBehaviour
         UIHealthBarView(Time.deltaTime);
     }
 
+    public void InitHealthBar()
+    {
+        HealthBar_C bar = ResolvedHealthBar;
+        Enemy_CommonData data = EnemyData;
+
+        if (bar == null || data == null) return;
+        
+        bar.SetMaxHealth(data.MaxHealth);
+        data.OnHealthChange += BindHealthBarChanged;
+    }
+
     private void UIHealthBarView(float deltaTime)
     {
         if (!bIsBeenHit) return;
-
-        /* 只在「刚被打中」的那一帧触发一次淡入。
-           如果每帧都调 HandleHealthBarFade(false)，函数内部会先 Kill 掉上一帧
-           刚创建的补间再重新建一个，补间永远停留在起始 alpha 无法推进到 1，
-           血条看起来就一直不显示 */
+        
         if (!bHealthBarVisible)
         {
             bHealthBarVisible = true;

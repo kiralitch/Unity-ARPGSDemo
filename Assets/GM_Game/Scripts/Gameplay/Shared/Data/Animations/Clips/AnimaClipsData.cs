@@ -59,7 +59,7 @@ public class AnimaClipsData
             RootGraph.SetTimeUpdateMode(DirectorUpdateMode.GameTime);
         }
 
-        /* 必须在确认图有效之后再记录到字段上。
+        /* 必须在确认图有效之后再记录到字段上
            PlayableGraph 是结构体、按值传递：若在有效性检查之前 this.graph = RootGraph，
            当传入的图已被 Destroy（对象池复用会先 Destroy 再重建），
            这里创建的新图只会赋给局部变量，this.graph 仍指向那张已失效的图，
@@ -531,4 +531,83 @@ public class AnimaClipsData
     }
 
     #endregion
+
+    /* 对象池复用时把整张动画图恢复到「刚出生」的干净状态
+       死亡/受击状态会把 CommonReactionTargets 指向死亡动画（角色倒地姿势），
+       而 AnimaClipsData 是每个敌人实例自己的运行时数据，进池不会重建
+       若不复位：复用取出后新的 CommonReactionMixer 仍会把死亡姿势按权重混进来，
+       表现为模型倒在胶囊体后面、半个身子陷进地面，直到攻击把根权重切到攻击层才恢复。
+       这里把所有目标权重归零，只留下待机移动姿势 */
+    public void ResetForReuse()
+    {
+        /* 通用反应（受击/死亡）全部清零 */
+        if (CommonReactionTargets != null)
+        {
+            for (int i = 0; i < CommonReactionTargets.Length; i++) CommonReactionTargets[i] = 0f;
+        }
+
+        /* 移动权重回到第一段（待机），并清掉攻击权重 */
+        if (movementTargets != null)
+        {
+            for (int i = 0; i < movementTargets.Length; i++) movementTargets[i] = 0f;
+            if (movementTargets.Length > 0) movementTargets[0] = 1f;
+        }
+
+        if (attackTargets != null)
+        {
+            for (int i = 0; i < attackTargets.Length; i++) attackTargets[i] = 0f;
+            if (attackTargets.Length > 0) attackTargets[0] = 1f;
+        }
+
+        /* 根权重交还移动层 */
+        targetMoveWeight = 1f;
+        targetAttackWeight = 0f;
+        targetCommonReactionWeight = 0f;
+
+        /* 直接把当前混合权重也压到位，避免复位后还要过渡几帧才淡出死亡姿势 */
+        if (MovementMixer.IsValid())
+        {
+            for (int i = 0; i < MovementMixer.GetInputCount(); i++)
+            {
+                MovementMixer.SetInputWeight(i, i == 0 ? 1f : 0f);
+            }
+        }
+
+        if (CommonReactionMixer.IsValid())
+        {
+            for (int i = 0; i < CommonReactionMixer.GetInputCount(); i++)
+            {
+                CommonReactionMixer.SetInputWeight(i, 0f);
+            }
+        }
+
+        if (AttackMixer.IsValid())
+        {
+            for (int i = 0; i < AttackMixer.GetInputCount(); i++)
+            {
+                AttackMixer.SetInputWeight(i, 0f);
+            }
+        }
+
+        if (RootMixer.IsValid())
+        {
+            RootMixer.SetInputWeight(0, 1f);
+            RootMixer.SetInputWeight(1, 0f);
+            RootMixer.SetInputWeight(2, 0f);
+        }
+
+        /* 连招进度一并清空 */
+        CurrentEnemyAbility = null;
+        ResetEnemyCombo();
+
+        /* 各动画时间回到起点，复用后不会从上一世播到的位置接着播 */
+        if (MovementMixer.IsValid())
+        {
+            for (int i = 0; i < MovementMixer.GetInputCount(); i++) ResetAnimationTime(i);
+        }
+        if (CommonReactionMixer.IsValid())
+        {
+            for (int i = 0; i < CommonReactionMixer.GetInputCount(); i++) ResetCommonReactionAnimationTime(i);
+        }
+    }
 }

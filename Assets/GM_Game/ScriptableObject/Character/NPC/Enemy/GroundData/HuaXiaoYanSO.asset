@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HuaXiaoYanSO
   m_EditorClassIdentifier: 
   <GroundedData>k__BackingField:
-    <BaseSpeed>k__BackingField: 5.5
+    <BaseSpeed>k__BackingField: 4
     <AngularSpeed>k__BackingField: 360
     <Acceleration>k__BackingField: 50
     <StoppingDistance>k__BackingField: 0.5
-    <sightRange>k__BackingField: 20
+    <sightRange>k__BackingField: 15
     <sightAngle>k__BackingField: 120
     <obstacleMask>k__BackingField:
       serializedVersion: 2

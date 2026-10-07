@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Playables;
 
 /*
@@ -112,7 +113,7 @@ public class Enemy : CommonActor, IPoolable
         HitBoxUtils = HitBoxesTrans.GetComponentInChildren<SharedWeaponHitBox>();
         UIManager = GetComponent<EnemyUIManager>();
         
-        /* 克隆一份运行时血量数据，避免多个敌人共享同一个 SO 资产实例。
+        /* 克隆一份运行时血量数据，避免多个敌人共享同一个 SO 资产实例
            必须在任何读写 CurrentHealth / 订阅事件之前完成，
            否则事件会挂到共享资产上，导致一个敌人死亡时所有敌人一起死 */
         var clone = Instantiate(CommonAssetData);
@@ -149,6 +150,15 @@ public class Enemy : CommonActor, IPoolable
 
     private void OnEnable()
     {
+        /* applyRootMotion 是 Animator 上的序列化属性：SetActive(false) 再 SetActive(true)
+           （对象池的取出/回收就是这套流程）时，它会从预制体的序列化值恢复
+           因此每次启用都要重新关掉，保证刚体和模型只受 Agent 驱动 */
+        if (animator == null) animator = GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.applyRootMotion = false;
+        }
+
         AnimationGraph = AnimationClipData.Initialize(animator, AnimationGraph);
 
         AISightCoroutine = StartCoroutine(AISightCheck());
@@ -278,7 +288,7 @@ public class Enemy : CommonActor, IPoolable
         StartCoroutine(FinishDeathAtEndOfFrame());
     }
 
-    /* 停掉所有还在跑的逻辑：AI 视协程、黑板、寻路与物理。
+    /* 停掉所有还在跑的逻辑：AI 视协程、黑板、寻路与物理
        协程必须在这里停，因为 OnDisable 时 StopCoroutine(null) 会告警，
        而销毁流程结束后协程已经无法再安全访问组件 */
     private void StopDeathRuntime()
@@ -299,7 +309,7 @@ public class Enemy : CommonActor, IPoolable
             Agent.enabled = false;
         }
 
-        /* 死亡后不该再参与受击与碰撞：禁掉刚体并关掉所有碰撞体，
+        /* 死亡后不该再参与受击与碰撞,禁掉刚体并关掉所有碰撞体，
            否则尸体在动画结束的这一帧还能被打中并触发一次新的死亡流程 */
         if (Body != null)
         {
@@ -477,6 +487,10 @@ public class Enemy : CommonActor, IPoolable
             RuntimeCommonData.InitData(); // CurrentHealth = MaxHealth
         }
 
+        /* 兜底再关一次根位移：OnEnable 已经关过，但这里再保证一次，
+           避免取出流程有别的路径把它重新打开 */
+        if (animator != null) animator.applyRootMotion = false;
+
         CurrentStateMode = EnemyStateMode.Movement;
 
         AIController?.SetAttacking(false);
@@ -484,11 +498,18 @@ public class Enemy : CommonActor, IPoolable
         AIController?.ResetCachedPlayer();
 
         if(UIManager != null) UIManager.InitHealthBar();
+
+        /* 复位动画图：死亡时把根权重 targets 与通用反应权重都指向了死亡动画（倒地姿势），
+           而 AnimaClipsData 是实例自己的运行时数据、进池不重建。
+           不复位的话复用后死亡姿势会继续混进待机/跑动，表现为模型倒在胶囊体后面、
+           半身陷地，直到攻击把根权重切到攻击层才恢复。
+           此时 OnEnable 已经重建好动画图，可以安全复位 */
+        AnimationClipData?.ResetForReuse();
         
-        /* 还原 AI 寻路。
-           先把 Agent 的内部位置 Warp 到当前的出生点，再恢复寻路：
+        /* 还原 AI 寻路
+           先把 Agent 的内部位置 Warp 到当前的出生点，再恢复寻路
            复用取出时 Agent 内部还停在上一世死亡的位置，直接启用会先「瞬移」回旧点
-           再折返，看起来就是出生后疯跑一段。
+           再折返，看起来就是出生后疯跑一段
            注意：Warp 前必须先确保 Agent 处于启用状态且在 NavMesh 上 */
         var Agent = AIController != null ? AIController.Agent : null;
         if (Agent != null)
@@ -497,7 +518,7 @@ public class Enemy : CommonActor, IPoolable
             Agent.isStopped = true;
 
             /* Agent 的 transform 已经被池的取出流程摆到出生点，这里同步内部位置 */
-            if (UnityEngine.AI.NavMesh.SamplePosition(transform.position, out UnityEngine.AI.NavMeshHit Hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(transform.position, out NavMeshHit Hit, 1f, NavMesh.AllAreas))
             {
                 Agent.Warp(Hit.position);
             }
@@ -506,13 +527,7 @@ public class Enemy : CommonActor, IPoolable
             Agent.isStopped = false;
         }
 
-        /* 还原刚体与碰撞。
-           关键：刚体必须保持 Kinematic。
-           本角色是「Kinematic 刚体 + NavMeshAgent 直接写 transform」的移动方式，
-           刚体只作为碰撞代理，位移全部由 Agent 负责。
-           一旦把它改回非 Kinematic（动态），重力与物理求解器就会和 Agent 抢方向：
-           表现为移动时模型往后飘、速度忽快忽慢，停下（攻击）时又被弹回胶囊体位置。
-           插值同样保持关闭，避免渲染用的 transform 滞后于碰撞体所在的实际位置 */
+        /* 还原刚体与碰撞 */
         if (Body != null)
         {
             Body.velocity = Vector3.zero;
@@ -522,7 +537,7 @@ public class Enemy : CommonActor, IPoolable
             Body.interpolation = RigidbodyInterpolation.None;
         }
 
-        /* 还原自身碰撞体（死亡时被 StopDeathRuntime 全部关掉了）。
+        /* 还原自身碰撞体
            武器命中盒不在自身碰撞体里，它由攻击状态在出手瞬间开关，出生时必须是关的 */
         var Colliders = GetComponentsInChildren<Collider>(true);
         for (int i = 0; i < Colliders.Length; i++)
@@ -541,7 +556,7 @@ public class Enemy : CommonActor, IPoolable
         MovementStateMachine?.ChangeState(MovementStateMachine.IdleState);
     }
 
-    /* 回收进池前清理。
+    /* 回收进池前清理
        SetActive(false) 会触发 OnDisable，里面已负责停视野协程、解绑死亡回调、释放 PlayableGraph，
        这里只做状态层面的兜底，避免残留影响下一次复用 */
     public void OnPoolReturn()

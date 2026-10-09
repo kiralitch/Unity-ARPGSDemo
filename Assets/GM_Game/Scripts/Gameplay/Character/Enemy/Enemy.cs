@@ -249,7 +249,15 @@ public class Enemy : CommonActor, IPoolable
         if (RuntimeCommonData.CurrentHealth > 0f) return;
         
         base.PlayDeath();
-        
+
+        /* 广播全局怪物死亡事件：任务系统据此对“进行中”任务并行计数。
+           只在此处广播一次（OnDeathCall 已保证单次触发），不要求击杀者是玩家本人 */
+        Game.Task.Events.GameEventBus.RaiseMonsterDied(new Game.Task.Events.MonsterDiedEvent(
+            RuntimeCommonData.MonsterId,
+            Player.Instance != null ? Player.Instance.gameObject : null,
+            transform.position,
+            gameObject));
+
         AIController.SetAttacking(false);
         AIController.ResetAllBlackboard();
 

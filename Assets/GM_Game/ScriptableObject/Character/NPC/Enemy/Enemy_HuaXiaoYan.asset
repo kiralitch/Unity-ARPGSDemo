@@ -17,5 +17,6 @@ MonoBehaviour:
     <MaxHealth>k__BackingField: 100
     <CommonDamageScales>k__BackingField: 1.2
     <CommonDefence>k__BackingField: 5
+    <MonsterId>k__BackingField: 1001
     <Posture>k__BackingField: 80
     <MaxPosture>k__BackingField: 80

@@ -1,0 +1,32 @@
+{
+    "Version": 1,
+    "Tasks": [
+        {
+            "TaskId": "daily_task_1",
+            "SerialId": 1,
+            "TaskName": "测试任务",
+            "Description": "击杀01怪物3只",
+            "AcceptType": 1,
+            "bEnterDailyPool": true,
+            "FinishType": 0,
+            "Objectives": [
+                {
+                    "Type": 0,
+                    "TargetId": 1001,
+                    "TargetName": "花小雨",
+                    "RequiredCount": 3
+                }
+            ],
+            "Reward": {
+                "Exp": 0,
+                "Gold": 0,
+                "ItemIds": [],
+                "ItemCounts": []
+            },
+            "bRepeatable": true,
+            "PreTaskIds": [],
+            "NextTaskId": "",
+            "RequiredLevel": 0
+        }
+    ]
+}

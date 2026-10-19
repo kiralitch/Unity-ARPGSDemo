@@ -30,4 +30,9 @@ public abstract class CommonInteracItem : MonoBehaviour
     {
         Debug.Log("已离开交互物品范围内");
     }
+
+    public virtual void Interact()
+    {
+        
+    }
 }

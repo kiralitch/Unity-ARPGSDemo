@@ -11,7 +11,7 @@ using UnityEngine.Playables;
  */
 
 [RequireComponent(typeof(PlayerInput))] //当添加Player组件后也会自动添加PlayerInput组件
-public class Player : CommonActor
+public class Player : CommonActor, IInteractable
 {
     [field:SerializeField][field:Header("数据")]
     public Player_SO AssetData { get; private set; } //通用数据资产
@@ -421,6 +421,61 @@ public class Player : CommonActor
         if (CameraInput == null) return;
         
         CameraInput.SetWhenLockInCamera(bSet);
+    }
+
+    /* 交互物品 */
+
+    
+    #endregion
+
+    #region 交互
+
+    private CommonInteracItem CacheInteracItem;
+    
+    public void BindInteractInput(bool b, out string InteractText)
+    {
+        //先移除，避免重复订阅
+        playerInput.PlayerActions.Interaction.started -= StartInteract;
+        InteractText = GetInteractKeyText();
+        
+        if (b)
+        {
+            playerInput.PlayerActions.Interaction.started += StartInteract;
+        }
+    }
+
+    //获取按键显示名
+    private string GetInteractKeyText()
+    {
+        var action = playerInput.PlayerActions.Interaction;
+        if (action == null || action.controls.Count == 0) return null;
+
+        //当前生效按键（已启用、被触发时优先）
+        var control = action.activeControl ?? action.controls[0];
+        return control.displayName; // Keyboard/E → E
+    }
+
+    private void StartInteract(InputAction.CallbackContext obj)
+    {
+        if (CacheInteracItem == null)
+        {
+            Debug.Log("没有物品可交互");
+            return;
+        }
+        
+        CacheInteracItem.Interact();
+    }
+
+    public void Interact(CommonInteracItem interacItem)
+    {
+        if (interacItem == null) return;
+
+        CacheInteracItem = interacItem;
+    }
+
+    public void ClearCachedItem()
+    {
+        CacheInteracItem = null;
     }
 
     #endregion

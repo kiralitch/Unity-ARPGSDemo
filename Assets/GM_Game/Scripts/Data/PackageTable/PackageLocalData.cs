@@ -27,11 +27,19 @@ public class PackageLocalData : SingleTon<PackageLocalData>
         if (PlayerPrefs.HasKey("PackageLocalData"))
         {
             string InventoryJson = PlayerPrefs.GetString("PackageLocalData");
-            List<PackageLocalItem> localData = JsonUtility.FromJson<List<PackageLocalItem>>(InventoryJson); //反序列化获取存储好的PackageLocalData
-            return localData;
+            //List<PackageLocalItem> localData = JsonUtility.FromJson<List<PackageLocalItem>>(InventoryJson); //反序列化获取存储好的PackageLocalData
+            //return localData;
+            
+            if (!string.IsNullOrEmpty(InventoryJson))
+            {
+                Items = JsonUtility.FromJson<List<PackageLocalItem>>(InventoryJson);
+            }
         }
 
-        return new List<PackageLocalItem>();
+        if (Items == null) Items = new List<PackageLocalItem>();
+        return Items;
+        
+        //return new List<PackageLocalItem>();
     }
 }
 

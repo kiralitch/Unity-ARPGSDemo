@@ -39,6 +39,18 @@ public class Enemy_AttackState : Enemy_CombatCommonState
         StopAgentForAttack();
         LockPlayerPositionOnAttack();
         PlayAttackAnimation();
+
+        //技能时间轴：绑定本次技能并进入第 0 段（未配置时间轴时内部直接跳过）
+        if (CachedEnemy.SkillTimeline != null && CachedAbilityData != null && CachedAbilityData.AttackClips != null)
+        {
+            CachedEnemy.SkillTimeline.BeginAttack(
+                CachedAbilityData.Timeline,
+                CachedAbilityData.AttackClips.Count,
+                CachedAbilityData.AbilityDamage,
+                CachedAbilityData.animationSpeed,
+                0,
+                GetClipLengths(CachedAbilityData.AttackClips));
+        }
     }
 
     public override void PhysicsUpdate()
@@ -46,6 +58,9 @@ public class Enemy_AttackState : Enemy_CombatCommonState
         base.PhysicsUpdate();
         
         RotateToLockedPosition();
+
+        //技能时间轴：推进本段动画时间，到点执行音效/特效/伤害（不参与状态切换）
+        CachedEnemy.SkillTimeline?.OnAttackFrame(Time.fixedDeltaTime);
     }
 
     public override void Exit()
@@ -56,6 +71,22 @@ public class Enemy_AttackState : Enemy_CombatCommonState
         bAttackEnded = false;
         CachedEnemy.ResetRotationVelocity(); //清掉角速度，避免下一次攻击起步抖动
         ResumeAgentAfterAttack();
+
+        //技能时间轴：强制收尾并解绑，避免命中盒跨段残留
+        CachedEnemy.SkillTimeline?.EndAttack();
+    }
+
+    /* 每段连招动画的时长（秒），时间轴据此把事件时间钳制在本段内 */
+    private static float[] GetClipLengths(System.Collections.Generic.List<AnimationClip> clips)
+    {
+        if (clips == null) return null;
+
+        var lengths = new float[clips.Count];
+        for (int i = 0; i < clips.Count; i++)
+        {
+            lengths[i] = clips[i] != null ? clips[i].length : 0f;
+        }
+        return lengths;
     }
 
     /* 攻击期间停住 NavMeshAgent：否则 Agent 的转向和 RotateTowards 会同时写 transform.rotation，

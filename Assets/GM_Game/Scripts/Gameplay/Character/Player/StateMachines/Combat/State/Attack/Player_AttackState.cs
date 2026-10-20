@@ -35,7 +35,22 @@ public class Player_AttackState : Player_CombatCommonState
         CombatStateMachine.playerRef.RigidBody.velocity = Vector3.zero;
 
         MoveToTarget();
-        PlayAttackAnimaiton();
+        //本次实际播放的连招段索引：必须在 PlayAttackAnimaiton 里下标自增之前取，
+        //否则时间轴会一直停留在第 0 段，第二、三段会错误地执行第一段的事件
+        int playedSegment = PlayAttackAnimaiton();
+
+        //绑定本技能并进入本次播放的那一段，攻击开始传入所有的技能设置
+        var Ticker = CombatStateMachine.playerRef.SkillTimeline;
+        if (Ticker != null && CachedAbilitiesData != null)
+        {
+            Ticker.BeginAttack(
+                CachedAbilitiesData.Timeline,
+                CachedAbilitiesData.AttackClips.Count,
+                CachedAbilitiesData.AbilityDamage,
+                CachedAbilitiesData.animationSpeed,
+                playedSegment,
+                GetClipLengths(CachedAbilitiesData.AttackClips));
+        }
     }
     
     public override void PhysicsUpdate()
@@ -43,6 +58,13 @@ public class Player_AttackState : Player_CombatCommonState
         base.PhysicsUpdate();
 
         UpdateAttackDash();
+
+        //推进本段动画时间，到点执行音效/特效/伤害（不参与状态切换）
+        var Ticker = CombatStateMachine.playerRef.SkillTimeline;
+        if (Ticker != null)
+        {
+            Ticker.OnAttackFrame(Time.fixedDeltaTime);
+        }
     }
 
     public override void Exit()
@@ -50,21 +72,27 @@ public class Player_AttackState : Player_CombatCommonState
         base.Exit();
 
         AttackDashTimer = 0f;
+
+        //强制收尾并解绑，避免命中盒跨段残留
+        CombatStateMachine.playerRef.SkillTimeline?.EndAttack();
     }
 
     #region Main
 
-    private void PlayAttackAnimaiton()
+    /* 播放本次攻击动画，返回本次实际播放的连招段索引（供时间轴选择对应轨道） */
+    private int PlayAttackAnimaiton()
     {
         if (CachedAbilitiesData == null || CachedAbilitiesData.AttackClips == null || CachedAbilitiesData.AttackClips.Count == 0)
         {
             Debug.LogError("攻击动画为空");
-            return;
+            return 0;
         }
         
         //需要先判断，不然index会一直加
         if (CombotIndex < 0 || CombotIndex >= CachedAbilitiesData.AttackClips.Count)
             CombotIndex = 0;
+
+        int playedSegment = CombotIndex;
         
         CombatStateMachine.playerRef.AnimationClipData.PlayAttackClip(
             CachedAbilitiesData.AttackClips[CombotIndex],
@@ -80,6 +108,21 @@ public class Player_AttackState : Player_CombatCommonState
         {
             CombotIndex = 0;
         }
+
+        return playedSegment;
+    }
+
+    /* 每段连招动画的时长（秒），时间轴据此把事件时间钳制在本段内 */
+    private static float[] GetClipLengths(System.Collections.Generic.List<AnimationClip> clips)
+    {
+        if (clips == null) return null;
+
+        var lengths = new float[clips.Count];
+        for (int i = 0; i < clips.Count; i++)
+        {
+            lengths[i] = clips[i] != null ? clips[i].length : 0f;
+        }
+        return lengths;
     }
 
     /* 攻击朝向目标 */

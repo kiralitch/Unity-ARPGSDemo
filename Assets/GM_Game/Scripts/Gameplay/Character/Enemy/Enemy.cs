@@ -36,6 +36,9 @@ public class Enemy : CommonActor, IPoolable
     [field:SerializeField]
     public Transform HitBoxesTrans { get; private set; }
 
+    [field: SerializeField][field:Header("技能时间轴（可选）")]
+    public Game.SkillTimeline.SkillTimelineTicker SkillTimeline { get; private set; }
+
     [field:Header("AI区域")]
     [field: SerializeField]
     public BlackBoardSO AIBlackBoardData { get; private set; }

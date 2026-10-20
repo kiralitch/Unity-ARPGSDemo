@@ -27,3 +27,32 @@ MonoBehaviour:
     <inputAction>k__BackingField: {fileID: 8518295178871382062, guid: 474259d90ec4f1d40bc48b73d29093c1, type: 3}
     <AttackDistance>k__BackingField: 2.8
     <Events>k__BackingField: []
+    timeline:
+      Segments:
+      - ClipIndex: 0
+        Events:
+        - Type: 0
+          Time: 0.06
+          Duration: 0
+          AssetPath: Assets/GM_Game/Sound/Combat/Attack/sword-saber-swing-in-the-air-2.mp3
+          AttachPoint: 
+          Volume: 1
+          DamageScale: 1
+      - ClipIndex: 1
+        Events:
+        - Type: 0
+          Time: 0.17
+          Duration: 0
+          AssetPath: Assets/GM_Game/Sound/Combat/Attack/sword-saber-swing-in-the-air-2.mp3
+          AttachPoint: 
+          Volume: 1
+          DamageScale: 1
+      - ClipIndex: 2
+        Events:
+        - Type: 0
+          Time: 0.22
+          Duration: 0
+          AssetPath: Assets/GM_Game/Sound/Combat/Attack/sword-saber-swing-in-the-air-2.mp3
+          AttachPoint: 
+          Volume: 1
+          DamageScale: 1

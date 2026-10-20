@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
+using Game.SkillTimeline;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
@@ -38,6 +39,9 @@ public class Player : CommonActor, IInteractable
 
     [field: SerializeField] [field: Header("武器碰撞器")]
     public SharedWeaponHitBox PlayerWeaponHitBox { get; private set; }
+
+    [field: SerializeField] [field: Header("技能时间轴（可选）")]
+    public Game.SkillTimeline.SkillTimelineTicker SkillTimeline { get; private set; }
     
     [field: Header("玩家界面UI")]
     public HUDManager PlayerHUD { get; private set; }
@@ -87,6 +91,8 @@ public class Player : CommonActor, IInteractable
         CameraInput = PlayerCinemachineClass.GetComponent<CameraInputSet>();
         //AnimationGraph = AnimationClipData.Initialize(animator, AnimationGraph);
         //CharacterBone = FindCharacterBoneByName(transform, "Bip001");
+
+        SkillTimeline = GetComponent<SkillTimelineTicker>();
     }
 
     private void OnValidate() //在编辑器中更新

@@ -50,6 +50,13 @@ public class AnimaClipsData
 
     private AnimationClipPlayable CachedAttackClipPlayable;
     private AnimationClipPlayable CachedEndClipPlayable;
+
+    /* 当前攻击动画的播放速度，技能时间轴换算动画时间时使用 */
+    public float CurrentAttackSpeed { get; private set; } = 1f;
+
+    /* 敌人连招切换到新一段时触发，参数为新段索引。
+       技能时间轴订阅它来切换事件轨道；没有订阅者时行为与原来完全一致 */
+    public event System.Action<int> OnEnemyComboSegmentChanged;
     
     public PlayableGraph Initialize(Animator animator, PlayableGraph RootGraph)
     {
@@ -241,11 +248,32 @@ public class AnimaClipsData
 
         CachedAttackClipPlayable = CreateAttackPlayable(graph, attackClip, attackInputPort, speed);
         CachedEndClipPlayable = CreateAttackPlayable(graph, EndClip, attackEndInputPort, speed);
+        CurrentAttackSpeed = speed;
 
         //两个端口都已持有有效动画后再切换权重
         AttackMixer.SetInputWeight(attackInputPort, 1f);
         AttackMixer.SetInputWeight(attackEndInputPort, 0f);
         SetRootTarget(0f, 1f, 0f); // 切换到攻击权重
+    }
+
+    /* 技能时间轴采样用：本段攻击动画当前播放到的动画时间（秒）。
+       只读接口，不改变播放状态；未播放攻击时返回 0 */
+    public float GetCurrentAttackClipTime()
+    {
+        if (!CachedAttackClipPlayable.IsValid()) return 0f;
+        return (float)CachedAttackClipPlayable.GetTime();
+    }
+
+    /* 当前攻击动画的总时长（秒），供技能时间轴把事件时间钳制在本段内。
+       未播放攻击或取不到时返回 0 */
+    public float CurrentAttackClipLength
+    {
+        get
+        {
+            if (!CachedAttackClipPlayable.IsValid()) return 0f;
+            var clip = CachedAttackClipPlayable.GetAnimationClip();
+            return clip != null ? clip.length : 0f;
+        }
     }
     
     /* 播放攻击停止动画
@@ -292,6 +320,9 @@ public class AnimaClipsData
 
         //新节点已接管该端口，此时回收旧节点不会再造成空档
         if (bHasPrevious) Previous.Destroy();
+
+        //当前生效的攻击段（技能时间轴按此段取事件，采样失败时按此速度估算）
+        if (port == attackInputPort) CurrentAttackSpeed = speed;
 
         return playable;
     }
@@ -452,6 +483,9 @@ public class AnimaClipsData
         bHasPendingPreload = true;
 
         SetRootTarget(0f, 1f, 0f); // 保持攻击权重
+
+        //通知外部：连招已切到新的一段（技能时间轴据此切换事件轨道）
+        OnEnemyComboSegmentChanged?.Invoke(EnemyComboIndex);
         return true;
     }
 
